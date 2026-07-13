@@ -1,13 +1,38 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#6C63FF"/>
-  <rect x="4" y="4" width="11" height="11" rx="1" fill="white"/>
-  <rect x="6" y="6" width="7" height="7" rx="0.5" fill="#6C63FF"/>
-  <rect x="17" y="4" width="11" height="11" rx="1" fill="white"/>
-  <rect x="19" y="6" width="7" height="7" rx="0.5" fill="#6C63FF"/>
-  <rect x="4" y="17" width="11" height="11" rx="1" fill="white"/>
-  <rect x="6" y="19" width="7" height="7" rx="0.5" fill="#6C63FF"/>
-  <rect x="17" y="17" width="4" height="4" fill="white"/>
-  <rect x="24" y="17" width="4" height="4" fill="white"/>
-  <rect x="17" y="24" width="4" height="4" fill="white"/>
-  <rect x="24" y="24" width="4" height="4" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <!-- Shine overlay -->
+  <rect width="64" height="32" rx="14" fill="url(#shine)"/>
+
+  <!-- Top-left corner block -->
+  <rect x="8" y="8" width="20" height="20" rx="3" fill="white"/>
+  <rect x="12" y="12" width="12" height="12" rx="2" fill="url(#bg)"/>
+  <rect x="15" y="15" width="6" height="6" rx="1" fill="white"/>
+
+  <!-- Top-right corner block -->
+  <rect x="36" y="8" width="20" height="20" rx="3" fill="white"/>
+  <rect x="40" y="12" width="12" height="12" rx="2" fill="url(#bg)"/>
+  <rect x="43" y="15" width="6" height="6" rx="1" fill="white"/>
+
+  <!-- Bottom-left corner block -->
+  <rect x="8" y="36" width="20" height="20" rx="3" fill="white"/>
+  <rect x="12" y="40" width="12" height="12" rx="2" fill="url(#bg)"/>
+  <rect x="15" y="43" width="6" height="6" rx="1" fill="white"/>
+
+  <!-- Bottom-right data dots -->
+  <rect x="36" y="36" width="8" height="8" rx="2" fill="white"/>
+  <rect x="48" y="36" width="8" height="8" rx="2" fill="white"/>
+  <rect x="36" y="48" width="8" height="8" rx="2" fill="white"/>
+  <rect x="48" y="48" width="8" height="8" rx="2" fill="#EC4899"/>
 </svg>
