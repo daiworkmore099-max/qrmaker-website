@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vCard QR Code Generator — Digital Business Card | QRMaker</title>
+<meta name="description" content="Free vCard QR code generator. Create digital business card QR — share contact details with one scan. No signup, no watermark. Replace printed visiting cards.">
+<link rel="canonical" href="https://QRMaker.in/vcard.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/vcard.html">
+<meta property="og:title" content="vCard QR Code Generator — Digital Business Card | QRMaker">
+<meta property="og:description" content="Free vCard QR code generator. Create digital business card QR — share contact details with one scan. No signup, no watermark. Replace printed visiting cards.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="vCard QR Code Generator — Digital Business Card | QRMaker">
+<meta name="twitter:description" content="Free vCard QR code generator. Create digital business card QR — share contact details with one scan. No signup, no watermark. Replace printed visiting cards.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"vCard QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free</div>
+  <h1 class="page-title">vCard QR Code Generator</h1>
+  <p class="page-sub">Create a digital business card — share all contact details with one QR scan</p>
+  <div class="info-card">💡 Replace printed visiting cards with a QR code. Anyone who scans it gets your full contact saved to their phone in seconds.</div>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+      <div class="form-card">
+        <div class="form-title">👤 Contact Details</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <input class="form-input" id="vc-fn" type="text" placeholder="Raj" autofocus>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <input class="form-input" id="vc-ln" type="text" placeholder="Sharma">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Job Title</label>
+            <input class="form-input" id="vc-title" type="text" placeholder="Software Engineer">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company</label>
+            <input class="form-input" id="vc-org" type="text" placeholder="Company Name">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input class="form-input" id="vc-phone" type="tel" placeholder="+91 9876543210">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" id="vc-email" type="email" placeholder="raj@example.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Website</label>
+          <input class="form-input" id="vc-web" type="url" placeholder="https://yoursite.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Address (City, State)</label>
+          <input class="form-input" id="vc-addr" type="text" placeholder="Mumbai, Maharashtra">
+        </div>
+        <div class="form-group">
+          <label class="form-label">LinkedIn URL</label>
+          <input class="form-input" id="vc-li" type="url" placeholder="https://linkedin.com/in/rajsharma">
+        </div>
+      </div>
+      <div id="design-panel"></div>
+    </div>
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Enter name to<br>generate vCard QR</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="contact-preview" style="display:none;margin-bottom:12px;text-align:left;padding:10px;background:var(--surface-2);border-radius:8px;font-size:12px">
+          <div id="cp-name" style="font-weight:700;font-size:14px;margin-bottom:4px"></div>
+          <div id="cp-title" style="color:var(--text-2)"></div>
+          <div id="cp-org" style="color:var(--text-2)"></div>
+          <div id="cp-phone" style="color:var(--text-2)"></div>
+          <div id="cp-email" style="color:var(--text-2)"></div>
+        </div>
+        <div id="download-panel"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>vCard QR Code — Digital Visiting Card Generator</h2>
+    <p>Create a professional digital business card QR code. When someone scans it, all your contact information is instantly saved to their phone's contacts — name, phone, email, company, website, and more.</p>
+    <h3>Digital Visiting Card Kaise Banaye</h3>
+    <p>Printed visiting cards ki zaroorat nahi. QRMaker pe apna naam, phone, email, aur company details bharein. Ek QR code ban jaata hai jo aap apne phone ke back pe ya laptop pe stick kar sakte hain. Koi bhi scan kare aur contact save ho jaaye.</p>
+    <h3>VCard 3.0 Standard</h3>
+    <p>QRMaker uses the vCard 3.0 standard, which is supported by all major operating systems — Android, iOS, Windows, and macOS. The saved contact includes all fields you fill in.</p>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">vCard QR Code FAQs</div>
+    <div class="faq-item"><div class="faq-q">Which phones support vCard QR codes?</div><div class="faq-a">All modern smartphones — Android and iPhone. When scanned, the phone shows a "Save Contact" prompt. Works with native camera apps on both platforms.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I add multiple phone numbers?</div><div class="faq-a">The current form supports one phone number. For multiple numbers, use the plain text QR type and write the vCard manually, or generate one QR per number.</div></div>
+    <div class="faq-item"><div class="faq-q">Will the LinkedIn link be saved in contacts?</div><div class="faq-a">LinkedIn URL is saved as a URL field in the contact. Most phones display it in the contact card and can open it directly.</div></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('vcard.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+const fields = ['vc-fn','vc-ln','vc-title','vc-org','vc-phone','vc-email','vc-web','vc-addr','vc-li'];
+
+function generate() {
+  const fn = QBUtils.el('vc-fn').value, ln = QBUtils.el('vc-ln').value;
+  if (!fn && !ln) { QBUtils.el('placeholder').style.display = 'flex'; canvas.style.display = 'none'; state.matrix = null; return; }
+  const data = { firstName: fn, lastName: ln, title: QBUtils.el('vc-title').value, org: QBUtils.el('vc-org').value,
+    phone: QBUtils.el('vc-phone').value, email: QBUtils.el('vc-email').value,
+    website: QBUtils.el('vc-web').value, address: QBUtils.el('vc-addr').value };
+  const content = QREngine.buildContent('vcard', data);
+  try {
+    state.matrix = QREngine.generate(content, { errorLevel: state.options.errorLevel });
+    QBUtils.el('placeholder').style.display = 'none';
+    canvas.style.display = 'block';
+    const size = Math.min(QBUtils.el('canvas-wrap').offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+    // Update preview
+    const cp = QBUtils.el('contact-preview');
+    cp.style.display = 'block';
+    QBUtils.el('cp-name').textContent = [fn, ln].filter(Boolean).join(' ');
+    QBUtils.el('cp-title').textContent = data.title || '';
+    QBUtils.el('cp-org').textContent = data.org || '';
+    QBUtils.el('cp-phone').textContent = data.phone ? '📞 ' + data.phone : '';
+    QBUtils.el('cp-email').textContent = data.email ? '✉️ ' + data.email : '';
+  } catch(e) { console.error(e); }
+}
+
+fields.forEach(id => QBUtils.el(id)?.addEventListener('input', QBUtils.debounce(generate, 400)));
+QBUtils.wireDesignPanel(state, generate);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-vcard-' + [QBUtils.el('vc-fn').value, QBUtils.el('vc-ln').value].filter(Boolean).join('-').toLowerCase());
+QBUtils.initFAQ();
+</script>
+</body>
+</html>

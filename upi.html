@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UPI QR Code Generator — GPay PhonePe Paytm | QRMaker</title>
+<meta name="description" content="Free UPI QR code generator for India. Create payment QR code for Google Pay, PhonePe, Paytm, BHIM. No signup, no watermark. UPI QR code kaise banaye.">
+<link rel="canonical" href="https://QRMaker.in/upi.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/upi.html">
+<meta property="og:title" content="UPI QR Code Generator — GPay PhonePe Paytm | QRMaker">
+<meta property="og:description" content="Free UPI QR code generator for India. Create payment QR code for Google Pay, PhonePe, Paytm, BHIM. No signup, no watermark. UPI QR code kaise banaye.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="UPI QR Code Generator — GPay PhonePe Paytm | QRMaker">
+<meta name="twitter:description" content="Free UPI QR code generator for India. Create payment QR code for Google Pay, PhonePe, Paytm, BHIM. No signup, no watermark. UPI QR code kaise banaye.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"UPI QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free — India Exclusive</div>
+  <h1 class="page-title">UPI QR Code Generator</h1>
+  <p class="page-sub">Create free UPI payment QR code — accept payments from GPay, PhonePe, Paytm, BHIM instantly</p>
+
+  <div class="india-card">
+    🇮🇳 <strong>India Exclusive Feature</strong> — UPI QR codes work with all Indian UPI apps. Nobody else offers free UPI QR generation. Generate and download unlimited UPI payment QR codes at zero cost.
+  </div>
+
+  <div class="upi-apps" style="margin-bottom:1.5rem">
+    <span style="font-size:13px;font-weight:600;color:var(--text-2)">Compatible with:</span>
+    <span class="upi-app-badge">✅ Google Pay</span>
+    <span class="upi-app-badge">✅ PhonePe</span>
+    <span class="upi-app-badge">✅ Paytm</span>
+    <span class="upi-app-badge">✅ BHIM</span>
+    <span class="upi-app-badge">✅ Amazon Pay</span>
+    <span class="upi-app-badge">✅ All Bank Apps</span>
+  </div>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+      <div class="form-card">
+        <div class="form-title">💳 UPI Payment Details</div>
+        <div class="form-group">
+          <label class="form-label">UPI ID / VPA *</label>
+          <input class="form-input large" id="upi-id" type="text" placeholder="yourname@okicici" autocomplete="off" autofocus>
+          <div class="form-hint" id="upi-hint">Format: name@bankcode — e.g. raj@okicici, shop@ybl, user@paytm</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Payee Name *</label>
+          <input class="form-input" id="upi-name" type="text" placeholder="Your Name or Business Name">
+          <div class="form-hint">Name shown to customer when they scan</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Amount ₹ (optional)</label>
+            <input class="form-input" id="upi-amount" type="number" min="0" step="0.01" placeholder="Leave empty for any amount">
+            <div class="form-hint">If empty, payer enters amount</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Payment Note (optional)</label>
+            <input class="form-input" id="upi-note" type="text" placeholder="e.g. Order #123">
+          </div>
+        </div>
+        <div id="upi-content-preview" style="display:none;margin-top:8px;padding:8px 10px;background:var(--surface-2);border-radius:6px;font-size:11px;font-family:monospace;color:var(--text-2);word-break:break-all"></div>
+      </div>
+
+      <!-- How to find UPI ID -->
+      <div class="form-card">
+        <div class="form-title">🔍 How to Find Your UPI ID</div>
+        <div class="steps-grid" style="grid-template-columns:1fr 1fr">
+          <div class="step-card" style="padding:0.75rem">
+            <div style="font-size:18px;margin-bottom:6px">G Pay</div>
+            <div class="step-desc">Open GPay → Profile photo → UPI IDs</div>
+          </div>
+          <div class="step-card" style="padding:0.75rem">
+            <div style="font-size:18px;margin-bottom:6px">PhonePe</div>
+            <div class="step-desc">PhonePe → Profile → UPI ID</div>
+          </div>
+          <div class="step-card" style="padding:0.75rem">
+            <div style="font-size:18px;margin-bottom:6px">Paytm</div>
+            <div class="step-desc">Profile → Bank Account → UPI ID</div>
+          </div>
+          <div class="step-card" style="padding:0.75rem">
+            <div style="font-size:18px;margin-bottom:6px">BHIM</div>
+            <div class="step-desc">BHIM → Profile → UPI ID shown</div>
+          </div>
+        </div>
+        <div class="form-hint" style="margin-top:8px">Common formats: name@okicici, name@ybl, name@paytm, name@upi, name@okhdfcbank</div>
+      </div>
+
+      <div id="design-panel"></div>
+    </div>
+
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">UPI QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Enter UPI ID to<br>generate payment QR</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="upi-name-display" style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;display:none"></div>
+        <div id="upi-amount-display" style="font-size:20px;font-weight:800;color:var(--green);margin-bottom:12px;display:none"></div>
+        <div id="download-panel"></div>
+        <div style="margin-top:12px;font-size:11px;color:var(--text-3);text-align:center">
+          🔒 Safe to share — only you can receive payments<br>
+          No one can reverse payments using your QR code
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="types-section">
+    <div class="section-heading">Who Uses UPI QR Codes</div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">🏪</div><div class="step-title">Shop Owners</div><div class="step-desc">Accept digital payments without a card machine</div></div>
+      <div class="step-card"><div class="step-num">🥘</div><div class="step-title">Street Vendors</div><div class="step-desc">Chaiwala, paanipuri wala — accept UPI payments</div></div>
+      <div class="step-card"><div class="step-num">🍽️</div><div class="step-title">Restaurants</div><div class="step-desc">Bill payment QR at table</div></div>
+      <div class="step-card"><div class="step-num">📚</div><div class="step-title">Tutors</div><div class="step-desc">Fee collection via QR scan</div></div>
+      <div class="step-card"><div class="step-num">💼</div><div class="step-title">Freelancers</div><div class="step-desc">Invoice payment QR on proposals</div></div>
+      <div class="step-card"><div class="step-num">🏠</div><div class="step-title">Rent Collection</div><div class="step-desc">Fixed amount QR for monthly rent</div></div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>UPI QR Code Generator — Free for All Indian Businesses</h2>
+    <p>QRMaker is India's only free UPI QR code generator. Create UPI payment QR codes compatible with Google Pay, PhonePe, Paytm, BHIM, and all other UPI apps — completely free, no signup required.</p>
+
+    <h3>UPI QR Code Kaise Banaye (How to Create UPI QR Code)</h3>
+    <p>UPI QR code banana bahut simple hai. Apna UPI ID (jaise yourname@okicici) enter karo, apna naam daalo, optional amount aur note bhi add kar sakte ho. QR code turant generate ho jaata hai. Ise print karo ya digital share karo — koi bhi UPI app se scan karke payment kar sakta hai.</p>
+
+    <h3>Google Pay QR Code Kaise Banaye</h3>
+    <p>Google Pay ka QR code banane ke liye apna GPay UPI ID chahiye. GPay kholein → Profile photo → UPI IDs mein apna ID milega (usually name@okicici ya name@oksbi format). Woh ID yahan paste karein aur QR code ready hai.</p>
+
+    <h3>Is UPI QR Code Safe?</h3>
+    <p>Haan, bilkul safe hai. UPI QR code sirf payment receive karne ke liye hota hai — koi bhi aapka QR code scan karke aapke account se paise nahi le sakta. Payment sirf aapke account mein credit hoti hai. NPCI (National Payments Corporation of India) ka standard protocol use hota hai.</p>
+
+    <h3>Fixed Amount vs Open Amount UPI QR</h3>
+    <ul>
+      <li><strong>Fixed Amount QR</strong> — Enter the amount (e.g. ₹500). When scanned, payment app shows ₹500 pre-filled. Good for specific products, fees, or rent collection.</li>
+      <li><strong>Open Amount QR</strong> — Leave amount empty. Customer enters any amount. Good for general shop payments and tips.</li>
+    </ul>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">UPI QR Code FAQs</div>
+    <div class="faq-item"><div class="faq-q">What is a UPI ID (VPA)?</div><div class="faq-a">UPI ID (Virtual Payment Address) is a unique identifier linked to your bank account. Format is usually name@bankcode. Examples: raj@okicici, shop@ybl, user@paytm, merchant@okhdfcbank. You can find yours in any UPI app.</div></div>
+    <div class="faq-item"><div class="faq-q">Will the QR work with Google Pay, PhonePe and Paytm?</div><div class="faq-a">Yes. The UPI QR code uses the standard upi://pay protocol which is supported by all UPI apps including Google Pay, PhonePe, Paytm, BHIM, Amazon Pay, and all bank UPI apps.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I set a fixed payment amount?</div><div class="faq-a">Yes. Enter the amount in the "Amount ₹" field. When a customer scans the QR, the payment app will show that amount pre-filled. Leave empty to let the customer enter any amount.</div></div>
+    <div class="faq-item"><div class="faq-q">Is it safe to display this QR code publicly?</div><div class="faq-a">Yes, completely safe. UPI QR codes can only be used to send money TO you — nobody can take money FROM your account using the QR code. It's just your UPI address encoded.</div></div>
+    <div class="faq-item"><div class="faq-q">Does it work without internet when printed?</div><div class="faq-a">The QR code itself works offline (it's just printed). The customer's phone needs internet to complete the UPI payment. The QR code generation happens entirely in your browser — no data sent to servers.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I print it for my shop?</div><div class="faq-a">Yes! Download in PNG (1024px or 2048px) for good print quality, or SVG for any size. Recommended minimum print size: 6cm × 6cm for shop display. Test scan before printing in bulk.</div></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('upi.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+
+function generate() {
+  const upiId = (QBUtils.el('upi-id').value || '').trim();
+  const name = (QBUtils.el('upi-name').value || '').trim();
+  const amount = QBUtils.el('upi-amount').value;
+  const note = QBUtils.el('upi-note').value;
+
+  if (!upiId) {
+    QBUtils.el('placeholder').style.display = 'flex';
+    canvas.style.display = 'none';
+    QBUtils.el('upi-content-preview').style.display = 'none';
+    state.matrix = null;
+    return;
+  }
+
+  const valid = QBUtils.isValidUPI(upiId);
+  QBUtils.el('upi-id').className = 'form-input large ' + (valid ? 'valid' : (upiId.length > 3 ? 'invalid' : ''));
+  QBUtils.el('upi-hint').textContent = valid ? '✓ Valid UPI ID format' : 'Format should be name@bankcode (e.g. yourname@okicici)';
+  QBUtils.el('upi-hint').style.color = valid ? 'var(--green)' : 'var(--text-3)';
+
+  const content = QREngine.buildContent('upi', { upiId, name, amount, note });
+  QBUtils.el('upi-content-preview').textContent = content;
+  QBUtils.el('upi-content-preview').style.display = 'block';
+
+  try {
+    state.matrix = QREngine.generate(content, { errorLevel: state.options.errorLevel });
+    QBUtils.el('placeholder').style.display = 'none';
+    canvas.style.display = 'block';
+    const size = Math.min(QBUtils.el('canvas-wrap').offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+
+    const nameDisp = QBUtils.el('upi-name-display');
+    const amtDisp = QBUtils.el('upi-amount-display');
+    if (name) { nameDisp.textContent = name; nameDisp.style.display = 'block'; }
+    else nameDisp.style.display = 'none';
+    if (amount) { amtDisp.textContent = '₹' + parseFloat(amount).toLocaleString('en-IN'); amtDisp.style.display = 'block'; }
+    else amtDisp.style.display = 'none';
+  } catch(e) { console.error(e); }
+}
+
+['upi-id','upi-name','upi-amount','upi-note'].forEach(id => {
+  QBUtils.el(id)?.addEventListener('input', QBUtils.debounce(generate, 400));
+});
+
+QBUtils.wireDesignPanel(state, generate);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-upi-' + (QBUtils.el('upi-id').value || 'payment').replace(/[^a-z0-9@.\-]/gi, '-'));
+QBUtils.initFAQ();
+</script>
+</body>
+</html>

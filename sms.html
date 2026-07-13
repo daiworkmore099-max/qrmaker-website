@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SMS QR Code Generator — Pre-filled Text Message | QRMaker</title>
+<meta name="description" content="Free SMS QR code generator. Create QR code that opens SMS with pre-filled message. No signup, no watermark. Works on all phones.">
+<link rel="canonical" href="https://QRMaker.in/sms.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/sms.html">
+<meta property="og:title" content="SMS QR Code Generator — Pre-filled Text Message | QRMaker">
+<meta property="og:description" content="Free SMS QR code generator. Create QR code that opens SMS with pre-filled message. No signup, no watermark. Works on all phones.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SMS QR Code Generator — Pre-filled Text Message | QRMaker">
+<meta name="twitter:description" content="Free SMS QR code generator. Create QR code that opens SMS with pre-filled message. No signup, no watermark. Works on all phones.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"SMS QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free</div>
+  <h1 class="page-title">SMS QR Code Generator</h1>
+  <p class="page-sub">Create a QR code that opens a pre-filled SMS — customer just taps Send</p>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+      <div class="form-card">
+        <div class="form-title">💬 SMS Details</div>
+        <div class="form-group">
+          <label class="form-label">Phone Number *</label>
+          <div class="input-wrap">
+            <span class="input-prefix">🇮🇳 +91</span>
+            <input class="form-input" id="sms-phone" type="tel" placeholder="9876543210" maxlength="10" autofocus>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message (optional)</label>
+          <textarea class="form-input" id="sms-msg" placeholder="Hi, I'd like to enquire about..." style="min-height:100px"></textarea>
+          <div class="form-hint">Pre-filled message — user can edit before sending</div>
+        </div>
+      </div>
+      <div id="design-panel"></div>
+    </div>
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Enter phone number<br>to generate SMS QR</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="download-panel"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>SMS QR Code Generator — Free</h2>
+    <p>Create a QR code that opens the SMS app with a pre-filled message. Perfect for customer feedback, opt-in campaigns, or any use case where you want customers to send you a text message easily.</p>
+    <h3>SMS QR Code Kaise Banaye</h3>
+    <p>Phone number enter karo aur optional message likho. QR code scan karte hi phone ka SMS app khulega with pre-filled number aur message. Customer sirf Send button dabaaye.</p>
+    <h3>Use Cases</h3>
+    <ul>
+      <li>Customer support — "Text us for help"</li>
+      <li>Feedback collection — pre-fill "I want to give feedback"</li>
+      <li>Appointment booking via SMS</li>
+      <li>Opt-in for SMS promotions</li>
+    </ul>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">SMS QR Code FAQs</div>
+    <div class="faq-item"><div class="faq-q">Does SMS QR work on all phones?</div><div class="faq-a">Yes. Scanning opens the native SMS app on both Android and iPhone. The phone number and message are pre-filled.</div></div>
+    <div class="faq-item"><div class="faq-q">Can the message be longer than 160 characters?</div><div class="faq-a">Yes, but long messages create larger QR codes that may be harder to scan. Keep messages under 100 characters for best results.</div></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('sms.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+
+function generate() {
+  const phone = (QBUtils.el('sms-phone').value || '').replace(/\D/g, '');
+  if (!phone || phone.length < 5) { QBUtils.el('placeholder').style.display = 'flex'; canvas.style.display = 'none'; state.matrix = null; return; }
+  const content = QREngine.buildContent('sms', { phone: '91' + phone, message: QBUtils.el('sms-msg').value });
+  try {
+    state.matrix = QREngine.generate(content, { errorLevel: state.options.errorLevel });
+    QBUtils.el('placeholder').style.display = 'none';
+    canvas.style.display = 'block';
+    const size = Math.min(QBUtils.el('canvas-wrap').offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+  } catch(e) { console.error(e); }
+}
+
+QBUtils.el('sms-phone').addEventListener('input', QBUtils.debounce(generate, 400));
+QBUtils.el('sms-msg').addEventListener('input', QBUtils.debounce(generate, 400));
+QBUtils.wireDesignPanel(state, generate);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-sms-' + (QBUtils.el('sms-phone').value || 'number'));
+QBUtils.initFAQ();
+</script>
+</body>
+</html>

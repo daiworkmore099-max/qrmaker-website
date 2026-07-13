@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event QR Code Generator — Add to Calendar | QRMaker</title>
+<meta name="description" content="Free event QR code generator. Create QR code to add event to Google Calendar, Apple Calendar, Outlook. No signup, no watermark.">
+<link rel="canonical" href="https://QRMaker.in/event.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/event.html">
+<meta property="og:title" content="Event QR Code Generator — Add to Calendar | QRMaker">
+<meta property="og:description" content="Free event QR code generator. Create QR code to add event to Google Calendar, Apple Calendar, Outlook. No signup, no watermark.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Event QR Code Generator — Add to Calendar | QRMaker">
+<meta name="twitter:description" content="Free event QR code generator. Create QR code to add event to Google Calendar, Apple Calendar, Outlook. No signup, no watermark.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Event QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free</div>
+  <h1 class="page-title">Event QR Code Generator</h1>
+  <p class="page-sub">Create a QR code to add an event to any calendar — scan to save instantly</p>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+      <div class="form-card">
+        <div class="form-title">📅 Event Details</div>
+        <div class="form-group">
+          <label class="form-label">Event Title *</label>
+          <input class="form-input large" id="ev-title" type="text" placeholder="Team Meeting / Wedding / Conference" autofocus>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Start Date & Time *</label>
+            <input class="form-input" id="ev-start" type="datetime-local">
+          </div>
+          <div class="form-group">
+            <label class="form-label">End Date & Time *</label>
+            <input class="form-input" id="ev-end" type="datetime-local">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location (optional)</label>
+          <input class="form-input" id="ev-loc" type="text" placeholder="Hall 4, Venue Name, City">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description / Notes (optional)</label>
+          <textarea class="form-input" id="ev-desc" placeholder="Meeting agenda, dress code, or any notes..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-card" style="background:var(--blue-light);border-color:#bfdbfe">
+        <div style="font-size:13px;color:#1e40af">
+          <strong>📱 Compatible with:</strong><br>
+          <span style="font-size:12px;opacity:0.8">Google Calendar · Apple Calendar · Outlook · Samsung Calendar · Any iCal-compatible app</span>
+        </div>
+      </div>
+
+      <div id="design-panel"></div>
+    </div>
+
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Fill event details<br>to generate QR code</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="event-preview" style="display:none;margin-bottom:12px;padding:10px;background:var(--surface-2);border-radius:8px;text-align:left">
+          <div id="ep-title" style="font-weight:700;font-size:14px;margin-bottom:4px"></div>
+          <div id="ep-time" style="font-size:12px;color:var(--text-2)"></div>
+          <div id="ep-loc" style="font-size:12px;color:var(--text-2)"></div>
+        </div>
+        <div id="download-panel"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="types-section">
+    <div class="section-heading">Event QR Use Cases</div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">💒</div><div class="step-title">Wedding Cards</div><div class="step-desc">Add wedding date directly to guest calendars</div></div>
+      <div class="step-card"><div class="step-num">🏢</div><div class="step-title">Corporate Events</div><div class="step-desc">Conference and seminar QR on flyers</div></div>
+      <div class="step-card"><div class="step-num">🎓</div><div class="step-title">Workshops</div><div class="step-desc">Training and workshop registration reminders</div></div>
+      <div class="step-card"><div class="step-num">🎉</div><div class="step-title">Parties & Meetups</div><div class="step-desc">Party invitations with date/time/venue QR</div></div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>Event QR Code Generator — Add to Calendar</h2>
+    <p>Create a QR code that, when scanned, allows anyone to add your event to their calendar with one tap. Works with Google Calendar, Apple Calendar, Microsoft Outlook, and any iCal-compatible calendar app.</p>
+    <h3>Wedding Invitation QR Code</h3>
+    <p>Indian weddings mein QR code cards bahut popular ho rahe hain. Event QR code wedding card pe print karo — guests scan karein aur wedding ki date, time aur venue seedha unke phone calendar mein save ho jaaye. Bahut convenient!</p>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">Event QR Code FAQs</div>
+    <div class="faq-item"><div class="faq-q">Which calendar apps does it work with?</div><div class="faq-a">The iCal format (VCALENDAR) is supported by Google Calendar, Apple Calendar, Microsoft Outlook, Samsung Calendar, and virtually all calendar apps on Android and iPhone.</div></div>
+    <div class="faq-item"><div class="faq-q">Will the event include a reminder?</div><div class="faq-a">The QR code creates the event without a reminder by default. After adding, users can set their own reminder in their calendar app.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I add an online meeting link?</div><div class="faq-a">Yes — paste the Zoom/Google Meet/Teams link in the Location or Description field. It will be saved with the calendar event.</div></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('event.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+// Set default start/end times
+const now = new Date();
+now.setMinutes(0, 0, 0);
+const later = new Date(now.getTime() + 3600000);
+const toLocal = d => new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,16);
+QBUtils.el('ev-start').value = toLocal(now);
+QBUtils.el('ev-end').value = toLocal(later);
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+
+function generate() {
+  const title = QBUtils.el('ev-title').value;
+  const start = QBUtils.el('ev-start').value;
+  const end = QBUtils.el('ev-end').value;
+  if (!title || !start || !end) { QBUtils.el('placeholder').style.display = 'flex'; canvas.style.display = 'none'; state.matrix = null; return; }
+  const content = QREngine.buildContent('event', { title, start, end, location: QBUtils.el('ev-loc').value, description: QBUtils.el('ev-desc').value });
+  try {
+    state.matrix = QREngine.generate(content, { errorLevel: state.options.errorLevel });
+    QBUtils.el('placeholder').style.display = 'none';
+    canvas.style.display = 'block';
+    const size = Math.min(QBUtils.el('canvas-wrap').offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+    // Preview
+    const ep = QBUtils.el('event-preview');
+    ep.style.display = 'block';
+    QBUtils.el('ep-title').textContent = '📅 ' + title;
+    QBUtils.el('ep-time').textContent = '🕐 ' + new Date(start).toLocaleString('en-IN', {dateStyle:'medium',timeStyle:'short'});
+    const loc = QBUtils.el('ev-loc').value;
+    QBUtils.el('ep-loc').textContent = loc ? '📍 ' + loc : '';
+  } catch(e) { console.error(e); }
+}
+
+['ev-title','ev-start','ev-end','ev-loc','ev-desc'].forEach(id => QBUtils.el(id)?.addEventListener('input', QBUtils.debounce(generate, 400)));
+QBUtils.wireDesignPanel(state, generate);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-event-' + (QBUtils.el('ev-title').value || 'event').replace(/\s+/g,'-').toLowerCase());
+QBUtils.initFAQ();
+generate();
+</script>
+</body>
+</html>

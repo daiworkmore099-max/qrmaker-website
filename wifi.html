@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WiFi QR Code Generator — Share Password Instantly | QRMaker</title>
+<meta name="description" content="Free WiFi QR code generator. Create QR code for WiFi password — guests scan to connect instantly, no typing needed. Works on Android and iPhone.">
+<link rel="canonical" href="https://QRMaker.in/wifi.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/wifi.html">
+<meta property="og:title" content="WiFi QR Code Generator — Share Password Instantly | QRMaker">
+<meta property="og:description" content="Free WiFi QR code generator. Create QR code for WiFi password — guests scan to connect instantly, no typing needed. Works on Android and iPhone.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WiFi QR Code Generator — Share Password Instantly | QRMaker">
+<meta name="twitter:description" content="Free WiFi QR code generator. Create QR code for WiFi password — guests scan to connect instantly, no typing needed. Works on Android and iPhone.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"WiFi QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free</div>
+  <h1 class="page-title">WiFi QR Code Generator</h1>
+  <p class="page-sub">Share your WiFi password — guests scan the QR code to connect instantly, no typing needed</p>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+      <div class="form-card">
+        <div class="form-title">📶 WiFi Network Details</div>
+        <div class="form-group">
+          <label class="form-label">Network Name (SSID) *</label>
+          <input class="form-input large" id="wifi-ssid" type="text" placeholder="MyHomeWiFi" autofocus>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Security Type</label>
+          <select class="form-input" id="wifi-sec">
+            <option value="WPA">WPA / WPA2 (most common)</option>
+            <option value="WEP">WEP (older routers)</option>
+            <option value="nopass">Open (no password)</option>
+          </select>
+        </div>
+        <div class="form-group" id="pw-group">
+          <label class="form-label">Password</label>
+          <div class="input-wrap">
+            <input class="form-input" id="wifi-pass" type="text" placeholder="WiFi password" style="border-radius:8px">
+          </div>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label">Hidden Network</span>
+          <label class="toggle"><input type="checkbox" id="wifi-hidden"><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+
+      <div class="form-card" style="background:var(--surface-2)">
+        <div class="form-title" style="color:var(--text-3)">📋 Generated WiFi Code</div>
+        <div id="wifi-preview" style="font-family:monospace;font-size:12px;color:var(--text-2);word-break:break-all;min-height:32px">
+          Enter network name above...
+        </div>
+      </div>
+
+      <div id="design-panel"></div>
+    </div>
+
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Enter network name<br>to generate WiFi QR</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="download-panel"></div>
+        <div style="margin-top:12px;font-size:11px;color:var(--text-3);text-align:center;line-height:1.6">
+          📱 iPhone: Scan with Camera app<br>
+          🤖 Android: Scan with Camera or QR app<br>
+          Tap the notification to connect
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="types-section">
+    <div class="section-heading">Perfect for</div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">☕</div><div class="step-title">Cafes & Restaurants</div><div class="step-desc">Display on table — customers scan to join WiFi</div></div>
+      <div class="step-card"><div class="step-num">🏨</div><div class="step-title">Hotels & Stays</div><div class="step-desc">Print in each room — guests connect instantly</div></div>
+      <div class="step-card"><div class="step-num">🏠</div><div class="step-title">Home Guests</div><div class="step-desc">No more spelling out your complex password</div></div>
+      <div class="step-card"><div class="step-num">🏢</div><div class="step-title">Offices</div><div class="step-desc">Guest WiFi QR at reception</div></div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>WiFi QR Code Generator — Free Online Tool</h2>
+    <p>Create a WiFi QR code that lets anyone connect to your network without typing the password. Works on all modern Android and iPhone devices — just scan with the camera app.</p>
+    <h3>WiFi QR Code Kaise Banaye</h3>
+    <p>Network name (SSID) aur password enter karo, QR code ban jaata hai. Print karo aur table pe ya wall pe lagao. Customers ya guests camera se scan karein — WiFi automatically connect ho jaata hai.</p>
+    <h3>Is it safe to share WiFi via QR?</h3>
+    <p>Yes. The QR code contains your WiFi name and password, but only people who physically scan it can connect. Keep the QR code in a controlled area (inside your shop/home). Anyone who scans gets your WiFi password, so don't use for secret networks.</p>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">WiFi QR Code FAQs</div>
+    <div class="faq-item"><div class="faq-q">Does it work on iPhone and Android?</div><div class="faq-a">Yes. iPhones (iOS 11+) and Android phones (9+) can scan WiFi QR codes with the built-in camera app. A notification appears — tap it to connect. No separate app needed.</div></div>
+    <div class="faq-item"><div class="faq-q">Is my password stored on any server?</div><div class="faq-a">No. All QR generation happens in your browser — your WiFi password is never sent to any server. Everything is 100% local.</div></div>
+    <div class="faq-item"><div class="faq-q">What security type should I select?</div><div class="faq-a">Most modern routers use WPA/WPA2 — select this if unsure. Older routers may use WEP. If your network has no password, select "Open".</div></div>
+    <div class="faq-item"><div class="faq-q">What is a hidden network?</div><div class="faq-a">A hidden network doesn't broadcast its SSID. If your WiFi is set to "hidden" in your router settings, enable the "Hidden Network" toggle so the QR code works correctly.</div></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('wifi.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+
+QBUtils.el('wifi-sec').addEventListener('change', () => {
+  QBUtils.el('pw-group').style.display = QBUtils.el('wifi-sec').value === 'nopass' ? 'none' : '';
+  generate();
+});
+
+function generate() {
+  const ssid = QBUtils.el('wifi-ssid').value;
+  if (!ssid) {
+    QBUtils.el('placeholder').style.display = 'flex';
+    canvas.style.display = 'none';
+    state.matrix = null;
+    QBUtils.el('wifi-preview').textContent = 'Enter network name above...';
+    return;
+  }
+  const content = QREngine.buildContent('wifi', {
+    ssid, password: QBUtils.el('wifi-pass').value,
+    security: QBUtils.el('wifi-sec').value,
+    hidden: QBUtils.el('wifi-hidden').checked
+  });
+  QBUtils.el('wifi-preview').textContent = content;
+  try {
+    state.matrix = QREngine.generate(content, { errorLevel: state.options.errorLevel });
+    QBUtils.el('placeholder').style.display = 'none';
+    canvas.style.display = 'block';
+    const size = Math.min(QBUtils.el('canvas-wrap').offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+  } catch(e) { console.error(e); }
+}
+
+['wifi-ssid','wifi-pass','wifi-hidden'].forEach(id => {
+  const el = QBUtils.el(id);
+  if (el) el.addEventListener('input', QBUtils.debounce(generate, 400));
+});
+
+QBUtils.wireDesignPanel(state, generate);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-wifi-' + (QBUtils.el('wifi-ssid').value || 'network').replace(/\s+/g,'-'));
+QBUtils.initFAQ();
+</script>
+</body>
+</html>

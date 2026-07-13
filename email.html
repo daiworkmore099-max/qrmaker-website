@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email QR Code Generator — Pre-filled Email | QRMaker</title>
+<meta name="description" content="Free email QR code generator. Create QR code that opens email with pre-filled address, subject and body. No signup, no watermark.">
+<link rel="canonical" href="https://QRMaker.in/email.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/email.html">
+<meta property="og:title" content="Email QR Code Generator — Pre-filled Email | QRMaker">
+<meta property="og:description" content="Free email QR code generator. Create QR code that opens email with pre-filled address, subject and body. No signup, no watermark.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Email QR Code Generator — Pre-filled Email | QRMaker">
+<meta name="twitter:description" content="Free email QR code generator. Create QR code that opens email with pre-filled address, subject and body. No signup, no watermark.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Email QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free</div>
+  <h1 class="page-title">Email QR Code Generator</h1>
+  <p class="page-sub">Create a QR code that opens a pre-filled email — recipient, subject, and body pre-filled</p>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+      <div class="form-card">
+        <div class="form-title">✉️ Email Details</div>
+        <div class="form-group">
+          <label class="form-label">Email Address *</label>
+          <input class="form-input large" id="em-email" type="email" placeholder="contact@yourcompany.com" autofocus>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject (optional)</label>
+          <input class="form-input" id="em-subj" type="text" placeholder="Enquiry about your services">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message Body (optional)</label>
+          <textarea class="form-input" id="em-body" placeholder="Hello, I'd like to know more about..." style="min-height:100px"></textarea>
+        </div>
+      </div>
+      <div id="design-panel"></div>
+    </div>
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Enter email address<br>to generate QR code</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="download-panel"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>Email QR Code Generator — Free</h2>
+    <p>Create a QR code that opens the email app with your address, subject, and message pre-filled. Perfect for business cards, brochures, and anywhere you want to make it easy for people to email you.</p>
+    <h3>Email QR Code Kaise Banaye</h3>
+    <p>Apna email address enter karo, optional subject aur message bhi add karo. QR scan karte hi phone ka default email app khulega with sab kuch pre-filled. User sirf Send dabaaye.</p>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">Email QR Code FAQs</div>
+    <div class="faq-item"><div class="faq-q">Which email apps does it open?</div><div class="faq-a">The mailto: link opens the default email app on the phone — Gmail, Outlook, Apple Mail, or any other default app the user has set.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I add CC or BCC?</div><div class="faq-a">Not directly in the form — but you can use the plain text QR and manually write: mailto:email@x.com?subject=X&cc=other@x.com</div></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('email.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+
+function generate() {
+  const email = (QBUtils.el('em-email').value || '').trim();
+  if (!email || !QBUtils.isValidEmail(email)) { QBUtils.el('placeholder').style.display = 'flex'; canvas.style.display = 'none'; state.matrix = null; return; }
+  const content = QREngine.buildContent('email', { email, subject: QBUtils.el('em-subj').value, body: QBUtils.el('em-body').value });
+  try {
+    state.matrix = QREngine.generate(content, { errorLevel: state.options.errorLevel });
+    QBUtils.el('placeholder').style.display = 'none';
+    canvas.style.display = 'block';
+    const size = Math.min(QBUtils.el('canvas-wrap').offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+  } catch(e) { console.error(e); }
+}
+
+['em-email','em-subj','em-body'].forEach(id => QBUtils.el(id)?.addEventListener('input', QBUtils.debounce(generate, 400)));
+QBUtils.wireDesignPanel(state, generate);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-email-' + (QBUtils.el('em-email').value || 'email').replace(/[^a-z0-9@.\-]/gi,'-'));
+QBUtils.initFAQ();
+</script>
+</body>
+</html>

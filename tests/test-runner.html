@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QRMaker — Browser Compatibility Test</title>
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.test-row { display:flex; align-items:center; gap:12px; padding:10px 14px; border:1px solid var(--border); border-radius:8px; margin-bottom:6px; background:white; }
+.test-icon { font-size:18px; width:24px; text-align:center; flex-shrink:0; }
+.test-name { flex:1; font-size:13px; font-weight:500; }
+.test-status { font-size:12px; font-weight:600; padding:3px 10px; border-radius:12px; flex-shrink:0; }
+.status-pass { background:var(--green-light); color:var(--green); }
+.status-fail { background:#fef2f2; color:var(--red); }
+.status-warn { background:var(--orange-light); color:var(--orange); }
+.status-pending { background:var(--surface-2); color:var(--text-3); }
+.score-ring { width:100px; height:100px; margin:0 auto 1rem; position:relative; }
+.score-ring svg { transform:rotate(-90deg); }
+.score-text { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; }
+.score-num { font-size:24px; font-weight:800; }
+.score-label { font-size:11px; color:var(--text-3); }
+.qr-test-canvas { border:1px solid var(--border); border-radius:4px; margin-top:6px; }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <h1 class="page-title">Browser Compatibility Test</h1>
+  <p class="page-sub">Checks all features QRMaker needs to work correctly in your browser</p>
+
+  <div style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;margin-bottom:2rem">
+    <div class="preview-card" style="position:static;min-width:180px;text-align:center">
+      <div class="score-ring">
+        <svg viewBox="0 0 100 100" width="100" height="100">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="var(--surface-2)" stroke-width="10"/>
+          <circle id="score-arc" cx="50" cy="50" r="42" fill="none" stroke="var(--green)" stroke-width="10"
+            stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round" style="transition:stroke-dashoffset 0.8s ease"/>
+        </svg>
+        <div class="score-text">
+          <div class="score-num" id="score-num">—</div>
+          <div class="score-label">of <span id="score-total">0</span></div>
+        </div>
+      </div>
+      <div id="score-label" style="font-size:13px;font-weight:600;color:var(--text-2)">Running tests…</div>
+      <div style="margin-top:1rem;font-size:12px;color:var(--text-3)" id="browser-info"></div>
+    </div>
+
+    <div id="test-list"></div>
+  </div>
+
+  <!-- QR Engine Test -->
+  <div class="form-card">
+    <div class="form-title">🔧 QR Engine Test</div>
+    <div id="qr-engine-results"></div>
+  </div>
+
+  <div class="form-card" style="margin-top:1rem">
+    <div class="form-title">💡 Recommendations</div>
+    <div id="recommendations" style="font-size:13px;color:var(--text-2);line-height:1.8"></div>
+  </div>
+
+  <button class="generate-btn" onclick="runAllTests()" style="margin-top:1rem;max-width:300px">🔄 Run Tests Again</button>
+</div>
+<div id="footer-placeholder"></div>
+
+<script src="../js/qrengine.js"></script>
+<script src="../js/design.js"></script>
+<script src="../js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+
+const TESTS = [
+  { id: 'canvas-2d',    name: 'Canvas 2D API',             icon: '🎨', desc: 'Required for QR rendering',           fn: testCanvas2D },
+  { id: 'canvas-png',   name: 'Canvas PNG Export',          icon: '🖼️', desc: 'Required for PNG download',          fn: testCanvasPNG },
+  { id: 'canvas-blob',  name: 'Canvas toBlob',              icon: '📦', desc: 'Required for clipboard copy',         fn: testCanvasBlob },
+  { id: 'blob-url',     name: 'Blob URL (SVG download)',     icon: '📄', desc: 'Required for SVG download',           fn: testBlobURL },
+  { id: 'text-encoder', name: 'TextEncoder',                 icon: '🔤', desc: 'Required for QR data encoding',       fn: testTextEncoder },
+  { id: 'clipboard',    name: 'Clipboard API',              icon: '📋', desc: 'Required for copy QR to clipboard',   fn: testClipboard },
+  { id: 'file-reader',  name: 'FileReader API',             icon: '📁', desc: 'Required for logo and image upload',  fn: testFileReader },
+  { id: 'get-user-media',name: 'Camera (getUserMedia)',     icon: '📷', desc: 'Required for camera QR scanner',      fn: testGetUserMedia },
+  { id: 'geolocation',  name: 'Geolocation API',            icon: '📍', desc: 'Required for location QR auto-fill',  fn: testGeolocation },
+  { id: 'local-storage',name: 'localStorage',               icon: '💾', desc: 'Required for scanner history',        fn: testLocalStorage },
+  { id: 'css-vars',     name: 'CSS Custom Properties',      icon: '🎨', desc: 'Required for theming',                fn: testCSSVars },
+  { id: 'indexeddb',    name: 'IndexedDB',                  icon: '🗄️', desc: 'Optional — advanced storage',        fn: testIndexedDB },
+];
+
+const results = {};
+
+async function runTest(test) {
+  try {
+    const result = await test.fn();
+    results[test.id] = result;
+  } catch(e) {
+    results[test.id] = { pass: false, note: e.message };
+  }
+  renderTests();
+  updateScore();
+}
+
+function renderTests() {
+  const list = document.getElementById('test-list');
+  list.innerHTML = TESTS.map(test => {
+    const r = results[test.id];
+    let statusClass = 'status-pending', statusText = 'Pending';
+    if (r) {
+      if (r.pass === true) { statusClass = 'status-pass'; statusText = '✓ Pass'; }
+      else if (r.pass === 'warn') { statusClass = 'status-warn'; statusText = '⚠ Limited'; }
+      else { statusClass = 'status-fail'; statusText = '✗ Fail'; }
+    }
+    return `<div class="test-row">
+      <span class="test-icon">${test.icon}</span>
+      <div>
+        <div class="test-name">${test.name}</div>
+        <div style="font-size:11px;color:var(--text-3)">${test.desc}${r && r.note ? ' — ' + r.note : ''}</div>
+      </div>
+      <span class="test-status ${statusClass}">${statusText}</span>
+    </div>`;
+  }).join('');
+}
+
+function updateScore() {
+  const done = Object.values(results);
+  const total = TESTS.length;
+  const passed = done.filter(r => r.pass === true || r.pass === 'warn').length;
+  const arc = document.getElementById('score-arc');
+  const pct = passed / total;
+  arc.setAttribute('stroke-dashoffset', 264 * (1 - pct));
+  arc.setAttribute('stroke', pct >= 0.9 ? 'var(--green)' : pct >= 0.6 ? 'var(--orange)' : 'var(--red)');
+  document.getElementById('score-num').textContent = passed;
+  document.getElementById('score-total').textContent = total;
+  const label = pct >= 0.9 ? '🎉 Excellent' : pct >= 0.7 ? '👍 Good' : '⚠️ Limited';
+  document.getElementById('score-label').textContent = done.length < total ? 'Testing…' : label;
+}
+
+// ── Individual tests ────────────────────────────────────────────────────────
+
+async function testCanvas2D() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 10;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#000'; ctx.fillRect(0,0,10,10);
+  return { pass: true, note: 'Supported' };
+}
+
+async function testCanvasPNG() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 10;
+  const url = c.toDataURL('image/png');
+  return { pass: url.startsWith('data:image/png'), note: url.startsWith('data:image/png') ? 'PNG export OK' : 'Not supported' };
+}
+
+async function testCanvasBlob() {
+  return new Promise(resolve => {
+    const c = document.createElement('canvas');
+    c.width = c.height = 10;
+    if (!c.toBlob) { resolve({ pass: false, note: 'toBlob not available' }); return; }
+    c.toBlob(blob => resolve({ pass: !!blob, note: blob ? 'Blob OK' : 'Failed' }));
+  });
+}
+
+async function testBlobURL() {
+  try {
+    const blob = new Blob(['test'], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    URL.revokeObjectURL(url);
+    return { pass: true, note: 'Blob URLs supported' };
+  } catch(e) { return { pass: false, note: e.message }; }
+}
+
+async function testTextEncoder() {
+  try {
+    const enc = new TextEncoder();
+    const bytes = enc.encode('Hello India 🇮🇳');
+    return { pass: bytes.length > 0, note: 'UTF-8 encoding OK' };
+  } catch(e) { return { pass: false, note: e.message }; }
+}
+
+async function testClipboard() {
+  if (navigator.clipboard && window.ClipboardItem) return { pass: true, note: 'Full clipboard API' };
+  if (navigator.clipboard) return { pass: 'warn', note: 'Text only (no image copy)' };
+  return { pass: 'warn', note: 'Fallback mode (open in new tab)' };
+}
+
+async function testFileReader() {
+  try { new FileReader(); return { pass: true, note: 'FileReader supported' }; }
+  catch(e) { return { pass: false, note: e.message }; }
+}
+
+async function testGetUserMedia() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia)
+    return { pass: false, note: 'Camera API not available — camera scanner won\'t work' };
+  return { pass: 'warn', note: 'Available (needs user permission)' };
+}
+
+async function testGeolocation() {
+  if (!navigator.geolocation) return { pass: false, note: 'Not available' };
+  return { pass: 'warn', note: 'Available (needs user permission)' };
+}
+
+async function testLocalStorage() {
+  try {
+    localStorage.setItem('QRMaker-test', '1');
+    localStorage.removeItem('QRMaker-test');
+    return { pass: true, note: 'localStorage OK' };
+  } catch(e) { return { pass: false, note: 'Blocked (private mode?)' }; }
+}
+
+async function testCSSVars() {
+  const el = document.createElement('div');
+  el.style.setProperty('--test', 'blue');
+  document.body.appendChild(el);
+  const val = getComputedStyle(el).getPropertyValue('--test').trim();
+  document.body.removeChild(el);
+  return { pass: val === 'blue', note: val === 'blue' ? 'CSS variables OK' : 'Not supported' };
+}
+
+async function testIndexedDB() {
+  if (!window.indexedDB) return { pass: 'warn', note: 'Not available' };
+  return { pass: true, note: 'IndexedDB supported' };
+}
+
+// ── QR Engine Tests ─────────────────────────────────────────────────────────
+
+function runQREngineTests() {
+  const tests = [
+    { name: 'URL QR', type: 'url', data: { url: 'https://QRMaker.in' } },
+    { name: 'WhatsApp QR', type: 'whatsapp', data: { phone: '9876543210', countryCode: '91' } },
+    { name: 'UPI QR', type: 'upi', data: { upiId: 'test@okicici', name: 'Test User', amount: '100' } },
+    { name: 'WiFi QR', type: 'wifi', data: { ssid: 'TestNet', password: 'pass123', security: 'WPA' } },
+    { name: 'vCard QR', type: 'vcard', data: { firstName: 'Raj', lastName: 'Sharma', phone: '+919876543210', email: 'raj@test.com' } },
+    { name: 'Text QR', type: 'text', data: { text: 'Hello India! QRMaker free QR generator.' } },
+  ];
+
+  const container = document.getElementById('qr-engine-results');
+  container.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px">';
+
+  for (const test of tests) {
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'text-align:center;padding:10px;background:var(--surface-2);border-radius:8px';
+    try {
+      const content = QREngine.buildContent(test.type, test.data);
+      const matrix = QREngine.generate(content, { errorLevel: 'M' });
+      const canvas = document.createElement('canvas');
+      QRDesign.render(matrix, canvas, { size: 140, fgColor: '#000', bgColor: '#fff' });
+      canvas.className = 'qr-test-canvas';
+      const label = document.createElement('div');
+      label.style.cssText = 'font-size:11px;font-weight:600;margin-top:6px;color:var(--text)';
+      label.textContent = test.name;
+      const status = document.createElement('div');
+      status.style.cssText = 'font-size:10px;color:var(--green);margin-top:2px';
+      status.textContent = '✓ ' + matrix.length + '×' + matrix.length;
+      wrapper.appendChild(canvas);
+      wrapper.appendChild(label);
+      wrapper.appendChild(status);
+    } catch(e) {
+      wrapper.innerHTML = `<div style="font-size:32px;margin:1rem">❌</div><div style="font-size:11px;color:var(--red)">${test.name} failed: ${e.message}</div>`;
+    }
+    container.appendChild(wrapper);
+  }
+  container.innerHTML += '</div>';
+}
+
+function buildRecommendations() {
+  const recs = [];
+  if (results['get-user-media']?.pass === false) recs.push('📷 Camera scanner requires a modern browser with camera support. Use Chrome on Android or Safari on iPhone.');
+  if (results['clipboard']?.pass === 'warn') recs.push('📋 Image clipboard copy requires Chrome 66+ or Edge 79+. Firefox supports text copy only.');
+  if (results['canvas-2d']?.pass === false) recs.push('🎨 Canvas API is required for QR rendering — please update your browser.');
+  if (results['local-storage']?.pass === false) recs.push('💾 localStorage is blocked — scanner history won\'t be saved. Check if you\'re in private mode.');
+  if (recs.length === 0) recs.push('✅ All features are working correctly in your browser! QRMaker should work perfectly.');
+  document.getElementById('recommendations').innerHTML = recs.map(r => `<div style="margin-bottom:6px">${r}</div>`).join('');
+}
+
+// ── Browser info ─────────────────────────────────────────────────────────────
+function getBrowserInfo() {
+  const ua = navigator.userAgent;
+  let browser = 'Unknown';
+  if (/Chrome\/(\d+)/.test(ua)) browser = 'Chrome ' + ua.match(/Chrome\/(\d+)/)[1];
+  else if (/Firefox\/(\d+)/.test(ua)) browser = 'Firefox ' + ua.match(/Firefox\/(\d+)/)[1];
+  else if (/Safari\//.test(ua) && !/Chrome/.test(ua)) browser = 'Safari';
+  else if (/Edg\/(\d+)/.test(ua)) browser = 'Edge ' + ua.match(/Edg\/(\d+)/)[1];
+  const platform = /Android/.test(ua) ? 'Android' : /iPhone|iPad/.test(ua) ? 'iOS' : 'Desktop';
+  document.getElementById('browser-info').textContent = browser + ' · ' + platform;
+}
+
+async function runAllTests() {
+  Object.keys(results).forEach(k => delete results[k]);
+  renderTests();
+  for (const test of TESTS) await runTest(test);
+  buildRecommendations();
+  runQREngineTests();
+}
+
+getBrowserInfo();
+renderTests();
+runAllTests();
+</script>
+</body>
+</html>

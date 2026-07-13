@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text QR Code Generator — Plain Text to QR Code | QRMaker</title>
+<meta name="description" content="Free plain text QR code generator. Convert any text to QR code — works offline, no internet needed to scan. No signup, no watermark.">
+<link rel="canonical" href="https://QRMaker.in/text.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/text.html">
+<meta property="og:title" content="Text QR Code Generator — Plain Text to QR Code | QRMaker">
+<meta property="og:description" content="Free plain text QR code generator. Convert any text to QR code — works offline, no internet needed to scan. No signup, no watermark.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Text QR Code Generator — Plain Text to QR Code | QRMaker">
+<meta name="twitter:description" content="Free plain text QR code generator. Convert any text to QR code — works offline, no internet needed to scan. No signup, no watermark.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Text QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free</div>
+  <h1 class="page-title">Text QR Code Generator</h1>
+  <p class="page-sub">Convert any text to a QR code — works offline when scanned, no internet needed</p>
+
+  <div class="info-card">💡 Plain text QR codes work offline — great for locker codes, room numbers, instructions, or any information that doesn't need a link.</div>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+      <div class="form-card">
+        <div class="form-title">📝 Text Content</div>
+        <div class="form-group">
+          <label class="form-label">Your Text *</label>
+          <textarea class="form-input" id="text-input" style="min-height:160px;font-size:15px" placeholder="Enter any text here...&#10;&#10;Examples:&#10;• WiFi password: MyPass123&#10;• Locker code: 4821&#10;• Meeting room: 3rd Floor, Room 302&#10;• Any message in any language" autofocus></textarea>
+          <div class="form-hint">
+            <span id="char-count">0</span> characters
+            — <span id="version-info">version auto-select</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card" style="background:var(--surface-2)">
+        <div class="form-title" style="color:var(--text-3)">💡 Text QR Use Cases</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <button class="dl-btn-secondary" onclick="setExample('WiFi Password: MyHomeWifi@123')">WiFi Password</button>
+          <button class="dl-btn-secondary" onclick="setExample('Locker Code: 4821')">Locker Code</button>
+          <button class="dl-btn-secondary" onclick="setExample('Table Number: 7\nWaiter will serve you shortly.')">Table Number</button>
+          <button class="dl-btn-secondary" onclick="setExample('Emergency Contact:\nDr. Sharma: +91 98765 43210\nAmbulance: 108')">Emergency Info</button>
+        </div>
+      </div>
+
+      <div id="design-panel"></div>
+    </div>
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Type some text to<br>generate QR code</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="download-panel"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>Plain Text QR Code Generator — Free</h2>
+    <p>Convert any plain text into a QR code instantly. Unlike URL QR codes, plain text QR codes work completely offline — no internet connection needed when scanning. The scanned text is displayed directly on screen.</p>
+    <h3>Text QR Code Kaise Banaye</h3>
+    <p>Koi bhi text likho — Hindi, English, numbers, anything. QR code turant ban jaata hai. Scan karne ke baad phone screen pe text directly dikhta hai, koi app ya internet ki zaroorat nahi.</p>
+    <h3>When to Use Text vs URL QR Code</h3>
+    <ul>
+      <li><strong>Use Text QR</strong> when the content is simple information (password, code, instructions)</li>
+      <li><strong>Use URL QR</strong> when you want to open a website or app</li>
+      <li><strong>Text QR works offline</strong> — URL QR needs internet to load the destination</li>
+    </ul>
+    <h3>Hindi Text QR Code</h3>
+    <p>QRMaker Hindi text ko bhi support karta hai. Devanagari script mein likha hua text bhi QR code mein encode ho jaata hai. Multilingual text bhi supported hai.</p>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">Text QR Code FAQs</div>
+    <div class="faq-item"><div class="faq-q">How much text can a QR code hold?</div><div class="faq-a">QRMaker supports up to version 10 which holds approximately 270 characters in byte mode. For longer text, the text is automatically truncated to fit. Keep text concise for easier scanning.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I put Hindi or other Indian languages?</div><div class="faq-a">Yes. QRMaker uses byte encoding (UTF-8) which supports all languages including Hindi (Devanagari), Tamil, Telugu, Bengali, and more.</div></div>
+    <div class="faq-item"><div class="faq-q">Does the phone need internet to read the text?</div><div class="faq-a">No. Plain text QR codes work completely offline. The text is stored in the QR code itself — the phone camera decodes it instantly without any network connection.</div></div>
+    <div class="faq-item"><div class="faq-q">Why is my QR code larger than a URL QR code?</div><div class="faq-a">QR code size depends on data length. Long text creates a larger QR with more modules. Shorter text = simpler QR = easier to scan. Trim whitespace and keep text concise.</div></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('text.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+const input = QBUtils.el('text-input');
+
+function setExample(text) {
+  input.value = text;
+  generate();
+}
+
+function generate() {
+  const text = input.value || '';
+  QBUtils.el('char-count').textContent = text.length;
+  if (!text.trim()) {
+    QBUtils.el('placeholder').style.display = 'flex';
+    canvas.style.display = 'none';
+    QBUtils.el('version-info').textContent = 'version auto-select';
+    state.matrix = null;
+    return;
+  }
+  const version = QREngine.selectVersion(text, state.options.errorLevel || 'M');
+  QBUtils.el('version-info').textContent = version ? 'QR version ' + version : 'text too long (max ~270 chars)';
+  try {
+    state.matrix = QREngine.generate(text, { errorLevel: state.options.errorLevel });
+    QBUtils.el('placeholder').style.display = 'none';
+    canvas.style.display = 'block';
+    const size = Math.min(QBUtils.el('canvas-wrap').offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+  } catch(e) { console.error(e); }
+}
+
+input.addEventListener('input', QBUtils.debounce(generate, 400));
+QBUtils.wireDesignPanel(state, generate);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-text');
+QBUtils.initFAQ();
+</script>
+</body>
+</html>

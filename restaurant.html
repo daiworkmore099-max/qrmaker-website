@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restaurant Menu QR Code Generator — Free | QRMaker</title>
+<meta name="description" content="Free restaurant menu QR code generator for India. Create digital menu QR in 30 seconds — customers scan to view menu. No signup, no watermark.">
+<link rel="canonical" href="https://QRMaker.in/restaurant.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/restaurant.html">
+<meta property="og:title" content="Restaurant Menu QR Code Generator — Free | QRMaker">
+<meta property="og:description" content="Free restaurant menu QR code generator for India. Create digital menu QR in 30 seconds — customers scan to view menu. No signup, no watermark.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Restaurant Menu QR Code Generator — Free | QRMaker">
+<meta name="twitter:description" content="Free restaurant menu QR code generator for India. Create digital menu QR in 30 seconds — customers scan to view menu. No signup, no watermark.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Restaurant Menu QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+<style>
+.print-template { background:white; border:2px solid var(--border); border-radius:16px; padding:2rem; text-align:center; max-width:320px; margin:0 auto; }
+.print-title { font-size:22px; font-weight:800; margin-bottom:4px; }
+.print-sub { font-size:13px; color:var(--text-2); margin-bottom:1rem; }
+.print-instructions { font-size:11px; color:var(--text-3); margin-top:1rem; line-height:1.6; }
+@media print {
+  body > *:not(#print-area) { display:none !important; }
+  #print-area { display:block !important; }
+  .print-template { border:none; box-shadow:none; }
+}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free</div>
+  <h1 class="page-title">Restaurant Menu QR Code Generator</h1>
+  <p class="page-sub">Create a QR code for your restaurant menu — customers scan to view menu instantly</p>
+
+  <div class="india-card">
+    🇮🇳 <strong>Post-COVID, 90% of Indian restaurants use QR menus.</strong> Create yours free in 30 seconds — no website needed.
+  </div>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+      <div class="tab-container">
+        <div class="tab-bar">
+          <button class="tab-btn active" id="tab-url">🔗 Menu URL</button>
+          <button class="tab-btn" id="tab-wa">💬 WhatsApp Menu</button>
+          <button class="tab-btn" id="tab-pdf">📄 Google Drive PDF</button>
+        </div>
+
+        <!-- Menu URL -->
+        <div id="panel-url" class="tab-panel active">
+          <div class="form-card">
+            <div class="form-title">🔗 Your Menu Website / Link</div>
+            <div class="form-group">
+              <label class="form-label">Menu URL *</label>
+              <input class="form-input large" id="menu-url" type="url" placeholder="https://yourmenu.com" autofocus>
+              <div class="form-hint">Paste your Zomato menu link, website, Google Drive PDF, or any URL</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Restaurant Name</label>
+              <input class="form-input" id="rest-name-url" type="text" placeholder="Sharma Dhaba">
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp menu -->
+        <div id="panel-wa" class="tab-panel">
+          <div class="form-card">
+            <div class="form-title">💬 WhatsApp Menu Request</div>
+            <div class="info-card" style="margin-bottom:1rem">For restaurants without a website — customers scan and WhatsApp you asking for the menu</div>
+            <div class="form-group">
+              <label class="form-label">WhatsApp Number *</label>
+              <div class="input-wrap">
+                <span class="input-prefix">🇮🇳 +91</span>
+                <input class="form-input" id="rest-wa-phone" type="tel" placeholder="9876543210" maxlength="10">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Restaurant Name</label>
+              <input class="form-input" id="rest-name-wa" type="text" placeholder="Sharma Dhaba">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Pre-filled Message</label>
+              <input class="form-input" id="rest-wa-msg" type="text" value="Hi, please share the menu">
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Drive PDF -->
+        <div id="panel-pdf" class="tab-panel">
+          <div class="form-card">
+            <div class="form-title">📄 Google Drive PDF Menu</div>
+            <div class="steps-grid" style="grid-template-columns:1fr;margin-bottom:1rem">
+              <div class="step-card">
+                <div class="step-num">1</div><div class="step-title">Upload PDF to Google Drive</div>
+                <div class="step-desc">Open drive.google.com → Upload your menu PDF</div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">2</div><div class="step-title">Get Shareable Link</div>
+                <div class="step-desc">Right-click → Share → Copy link → Set to "Anyone with link"</div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">3</div><div class="step-title">Paste Link Below</div>
+                <div class="step-desc">Paste the Drive link and generate QR</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Google Drive Link *</label>
+              <input class="form-input large" id="drive-url" type="url" placeholder="https://drive.google.com/file/d/...">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Restaurant Name</label>
+              <input class="form-input" id="rest-name-pdf" type="text" placeholder="Sharma Dhaba">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="design-panel"></div>
+    </div>
+
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">Menu QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Enter menu link to<br>generate QR code</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="download-panel"></div>
+
+        <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:12px">
+          <button class="dl-btn-secondary" id="show-print-btn" style="width:100%">🖨️ Print Table Card</button>
+        </div>
+      </div>
+
+      <!-- Print Template Preview -->
+      <div id="print-preview" style="display:none;margin-top:1rem">
+        <div class="print-template" id="print-template">
+          <div style="font-size:28px;margin-bottom:8px">📱</div>
+          <div class="print-title" id="print-rest-name">Restaurant Name</div>
+          <div class="print-sub">Scan for Menu</div>
+          <div id="print-canvas-wrap" style="display:inline-block;background:white;padding:12px;border:1px solid var(--border);border-radius:8px;margin:8px 0">
+            <canvas id="print-qr-canvas"></canvas>
+          </div>
+          <div class="print-instructions">
+            Open your camera app<br>
+            Point at the QR code<br>
+            Tap the notification to view menu
+          </div>
+        </div>
+        <button onclick="window.print()" class="generate-btn" style="margin-top:1rem">🖨️ Print This Card</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="types-section">
+    <div class="section-heading">Indian Business QR Templates</div>
+    <div class="types-grid">
+      <div class="type-card" style="cursor:default"><span class="type-card-icon">🍽️</span><div class="type-card-name">Restaurant</div><div class="type-card-desc">Table menu QR card</div></div>
+      <div class="type-card" style="cursor:default"><span class="type-card-icon">☕</span><div class="type-card-name">Chai / Coffee Shop</div><div class="type-card-desc">Price list QR</div></div>
+      <a href="upi.html" class="type-card"><span class="india-badge">🇮🇳 India</span><span class="type-card-icon">💳</span><div class="type-card-name">UPI Payment QR</div><div class="type-card-desc">Accept digital payments</div></a>
+      <a href="whatsapp.html" class="type-card"><span class="type-card-icon">💬</span><div class="type-card-name">WhatsApp Order</div><div class="type-card-desc">Scan to order via WhatsApp</div></a>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>Restaurant Menu QR Code — Free for Indian Restaurants</h2>
+    <p>Create a digital menu QR code for your restaurant, dhaba, café, or food stall in under a minute. No technical knowledge needed — if you have a menu photo, PDF, or Zomato link, you can create a QR code right now.</p>
+
+    <h3>Restaurant Menu QR Code Kaise Banaye</h3>
+    <p>Agar aapka menu Zomato ya Swiggy pe hai, toh woh link copy karo aur yahan paste karo — QR code ready. Agar sirf PDF hai, toh Google Drive pe upload karo, shareable link lo, aur yahan paste karo. Agar kuch bhi nahi hai, WhatsApp option use karo — customers WhatsApp karenge menu maangne ke liye.</p>
+
+    <h3>Print Tips for Restaurant QR Codes</h3>
+    <ul>
+      <li><strong>Minimum size</strong>: 5cm × 5cm for table display</li>
+      <li><strong>Laminate</strong> the printed QR code to protect from spills</li>
+      <li><strong>Test before printing</strong> in bulk — scan with multiple phones</li>
+      <li><strong>High contrast</strong> — black QR on white background scans best</li>
+      <li><strong>Download SVG</strong> for best print quality at any size</li>
+    </ul>
+
+    <h3>Benefits of Digital Menu QR Code</h3>
+    <ul>
+      <li>Update menu prices without reprinting</li>
+      <li>No printing cost for menu changes</li>
+      <li>Customers can view menu before sitting</li>
+      <li>Hygienic — no physical menu passing between customers</li>
+      <li>Works in dim restaurant lighting (phone screen is backlit)</li>
+    </ul>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">Restaurant Menu QR Code FAQs</div>
+    <div class="faq-item"><div class="faq-q">Do I need a website for a menu QR code?</div><div class="faq-a">No. You can upload your menu PDF to Google Drive and use that link. Or use the WhatsApp option — customers scan and WhatsApp you for the menu. No website needed.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I update the menu later?</div><div class="faq-a">If you're using a URL (website, Google Drive), update the content at the link — the QR code stays the same. The QR code always opens the same URL, so updating the menu at that URL is enough.</div></div>
+    <div class="faq-item"><div class="faq-q">How do I print the table card?</div><div class="faq-a">Generate the QR code, click "Print Table Card" to see a printable design with your restaurant name, QR code, and scan instructions. Click "Print This Card" to print directly.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I use my Zomato or Swiggy menu link?</div><div class="faq-a">Yes. Copy your Zomato or Swiggy restaurant page URL and paste it in the Menu URL field. Customers will be taken directly to your online menu when they scan.</div></div>
+  </div>
+</div>
+
+<div id="print-area" style="display:none"></div>
+<div id="footer-placeholder"></div>
+
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('restaurant.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+let activeTab = 'url';
+
+// Tab switching
+[['tab-url','panel-url','url'],['tab-wa','panel-wa','wa'],['tab-pdf','panel-pdf','pdf']].forEach(([tabId, panelId, name]) => {
+  document.getElementById(tabId).addEventListener('click', () => {
+    ['url','wa','pdf'].forEach(n => {
+      document.getElementById('tab-'+n).classList.toggle('active', n===name);
+      document.getElementById('panel-'+n).classList.toggle('active', n===name);
+    });
+    activeTab = name;
+    generate();
+  });
+});
+
+function getContent() {
+  switch (activeTab) {
+    case 'url': {
+      const url = (QBUtils.el('menu-url').value || '').trim();
+      return url ? QREngine.buildContent('url', { url }) : '';
+    }
+    case 'wa': {
+      const phone = (QBUtils.el('rest-wa-phone').value || '').replace(/\D/g,'');
+      const msg = QBUtils.el('rest-wa-msg').value;
+      return phone ? QREngine.buildContent('whatsapp', { phone, countryCode: '91', message: msg }) : '';
+    }
+    case 'pdf': {
+      const url = (QBUtils.el('drive-url').value || '').trim();
+      return url ? QREngine.buildContent('url', { url }) : '';
+    }
+  }
+  return '';
+}
+
+function getRestName() {
+  return QBUtils.el('rest-name-url')?.value || QBUtils.el('rest-name-wa')?.value || QBUtils.el('rest-name-pdf')?.value || 'Your Restaurant';
+}
+
+function generate() {
+  const content = getContent();
+  if (!content) { QBUtils.el('placeholder').style.display='flex'; canvas.style.display='none'; state.matrix=null; return; }
+  try {
+    state.matrix = QREngine.generate(content, { errorLevel: state.options.errorLevel });
+    QBUtils.el('placeholder').style.display = 'none';
+    canvas.style.display = 'block';
+    const size = Math.min(QBUtils.el('canvas-wrap').offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+    updatePrintPreview();
+  } catch(e) { console.error(e); }
+}
+
+function updatePrintPreview() {
+  if (!state.matrix) return;
+  QBUtils.el('print-rest-name').textContent = getRestName() || 'Restaurant Name';
+  QRDesign.render(state.matrix, QBUtils.el('print-qr-canvas'), Object.assign({ size: 180 }, state.options));
+}
+
+['menu-url','rest-name-url','rest-wa-phone','rest-wa-msg','rest-name-wa','drive-url','rest-name-pdf'].forEach(id => {
+  QBUtils.el(id)?.addEventListener('input', QBUtils.debounce(generate, 400));
+});
+
+document.getElementById('show-print-btn').addEventListener('click', () => {
+  if (!state.matrix) { QBUtils.showToast('Generate a QR code first', 'error'); return; }
+  const pp = QBUtils.el('print-preview');
+  pp.style.display = pp.style.display === 'none' ? 'block' : 'none';
+  if (pp.style.display === 'block') updatePrintPreview();
+});
+
+QBUtils.wireDesignPanel(state, generate);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-menu-' + (getRestName() || 'restaurant').replace(/\s+/g,'-').toLowerCase());
+QBUtils.initFAQ();
+</script>
+</body>
+</html>

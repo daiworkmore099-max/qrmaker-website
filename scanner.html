@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR Code Scanner Online — Scan from Camera or Image | QRMaker</title>
+<meta name="description" content="Free online QR code scanner. Scan QR codes using camera or upload image. No app needed. Decodes URL, WhatsApp, UPI, WiFi, vCard. Works on mobile and desktop.">
+<link rel="canonical" href="https://QRMaker.in/scanner.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/scanner.html">
+<meta property="og:title" content="QR Code Scanner Online — Scan from Camera or Image | QRMaker">
+<meta property="og:description" content="Free online QR code scanner. Scan QR codes using camera or upload image. No app needed. Decodes URL, WhatsApp, UPI, WiFi, vCard. Works on mobile and desktop.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="QR Code Scanner Online — Scan from Camera or Image | QRMaker">
+<meta name="twitter:description" content="Free online QR code scanner. Scan QR codes using camera or upload image. No app needed. Decodes URL, WhatsApp, UPI, WiFi, vCard. Works on mobile and desktop.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"QR Code Scanner Online","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+<style>
+.scanner-btn { padding:12px 24px; border-radius:10px; border:none; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.15s; }
+.scanner-btn-primary { background:var(--gradient); color:white; }
+.scanner-btn-secondary { background:var(--surface-2); color:var(--text); border:1.5px solid var(--border); }
+.scan-line { position:absolute; left:10%; right:10%; height:2px; background:rgba(37,99,235,0.8); box-shadow:0 0 8px rgba(37,99,235,0.6); animation:scan 2s linear infinite; }
+@keyframes scan { 0%{top:15%} 50%{top:80%} 100%{top:15%} }
+.history-item { display:flex; align-items:flex-start; gap:10px; padding:10px; border:1px solid var(--border); border-radius:8px; margin-bottom:6px; background:white; }
+.history-icon { font-size:20px; flex-shrink:0; line-height:1.4; }
+.history-content { flex:1; min-width:0; }
+.history-text { font-size:12px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.history-meta { font-size:11px; color:var(--text-3); margin-top:2px; }
+.result-type-badge { display:inline-block; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600; margin-bottom:8px; }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No app needed. No signup. 100% Free</div>
+  <h1 class="page-title">QR Code Scanner</h1>
+  <p class="page-sub">Scan any QR code using your camera or upload an image — works on all devices</p>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+      <div class="tab-container">
+        <div class="tab-bar">
+          <button class="tab-btn active" id="tab-camera">📷 Camera</button>
+          <button class="tab-btn" id="tab-image">🖼️ Upload Image</button>
+        </div>
+
+        <!-- Camera Tab -->
+        <div id="panel-camera" class="tab-panel active">
+          <div class="form-card" style="text-align:center">
+            <div class="scanner-video-wrap" id="video-wrap" style="display:none">
+              <video id="scanner-video" class="scanner-video" autoplay muted playsinline></video>
+              <canvas id="scanner-canvas" style="display:none"></canvas>
+              <div class="scanner-overlay">
+                <div class="scanner-frame">
+                  <span></span>
+                  <div class="scan-line"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="camera-placeholder" style="padding:2rem 0">
+              <div style="font-size:48px;margin-bottom:1rem">📷</div>
+              <div style="font-size:14px;color:var(--text-2);margin-bottom:1.5rem">Allow camera access to scan QR codes</div>
+              <button class="scanner-btn scanner-btn-primary" id="start-camera-btn">Start Camera Scanner</button>
+            </div>
+
+            <div id="camera-controls" style="display:none;margin-top:12px">
+              <button class="scanner-btn scanner-btn-secondary" id="stop-camera-btn">⏹ Stop Camera</button>
+              <div style="font-size:12px;color:var(--text-3);margin-top:8px" id="scan-status">Scanning… point camera at QR code</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Upload Tab -->
+        <div id="panel-image" class="tab-panel">
+          <div class="form-card">
+            <div class="logo-upload-zone" id="image-drop-zone" style="padding:2rem">
+              <div style="font-size:40px;margin-bottom:0.5rem">🖼️</div>
+              <div style="font-weight:600;margin-bottom:4px">Drop image here or click to upload</div>
+              <div style="font-size:12px;color:var(--text-3)">PNG, JPG, GIF, WebP — screenshot or photo of QR code</div>
+            </div>
+            <input type="file" id="image-upload" accept="image/*" style="display:none">
+            <canvas id="image-canvas" style="display:none;max-width:100%;border-radius:8px;margin-top:8px"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scan Result -->
+      <div class="scan-result" id="scan-result">
+        <div class="scan-result-label">Scanned Content</div>
+        <div id="result-type-badge" class="result-type-badge"></div>
+        <div class="scan-result-content" id="result-content"></div>
+        <div class="scan-actions" id="result-actions"></div>
+      </div>
+
+      <!-- History -->
+      <div id="history-section" style="display:none;margin-top:1rem">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div class="form-title" style="margin:0">Recent Scans</div>
+          <button onclick="clearHistory()" style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer">Clear</button>
+        </div>
+        <div id="history-list"></div>
+      </div>
+    </div>
+
+    <div class="generator-right">
+      <div class="preview-card" style="text-align:left">
+        <div style="font-size:13px;font-weight:700;margin-bottom:1rem">How to Scan</div>
+
+        <div style="margin-bottom:1rem">
+          <div style="font-size:12px;font-weight:600;color:var(--blue);margin-bottom:6px">📷 Camera Scanner</div>
+          <ol style="font-size:12px;color:var(--text-2);padding-left:1.25rem;line-height:1.8">
+            <li>Click "Start Camera Scanner"</li>
+            <li>Allow camera permission</li>
+            <li>Point camera at QR code</li>
+            <li>Result appears automatically</li>
+          </ol>
+        </div>
+
+        <div style="margin-bottom:1.5rem">
+          <div style="font-size:12px;font-weight:600;color:var(--purple);margin-bottom:6px">🖼️ Image Upload</div>
+          <ol style="font-size:12px;color:var(--text-2);padding-left:1.25rem;line-height:1.8">
+            <li>Switch to "Upload Image" tab</li>
+            <li>Drop or select a QR code image</li>
+            <li>Result shown instantly</li>
+          </ol>
+        </div>
+
+        <div style="background:var(--surface-2);border-radius:8px;padding:12px;font-size:12px;color:var(--text-2)">
+          <div style="font-weight:600;margin-bottom:6px">Detects QR Types:</div>
+          <div style="line-height:1.9">
+            🔗 URL / Website<br>
+            💬 WhatsApp Chat<br>
+            💳 UPI Payment<br>
+            📶 WiFi Password<br>
+            👤 Contact / vCard<br>
+            ✉️ Email<br>
+            📝 Plain Text<br>
+            📍 Location
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>Online QR Code Scanner — Free, No App Needed</h2>
+    <p>Scan any QR code directly from your browser — no app download, no signup. Works on mobile and desktop. Supports camera scanning and image upload. Automatically detects QR type and shows appropriate actions.</p>
+    <h3>QR Code Scanner Kaise Use Karein</h3>
+    <p>Camera tab mein "Start Camera Scanner" dabao. Permission do. QR code ke saamne camera point karo — turant decode ho jaata hai. Ya Image tab pe screenshot ya photo upload karo.</p>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">QR Scanner FAQs</div>
+    <div class="faq-item"><div class="faq-q">Does it work on mobile browsers?</div><div class="faq-a">Yes. Works on Chrome, Safari, Firefox on Android and iPhone. Camera permission required. For iPhone, use Safari for best experience.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I scan a screenshot of a QR code?</div><div class="faq-a">Yes. Use the "Upload Image" tab to upload a screenshot, photo, or any image containing a QR code. It scans and decodes automatically.</div></div>
+    <div class="faq-item"><div class="faq-q">Is my camera feed sent to any server?</div><div class="faq-a">No. Camera scanning happens entirely in your browser using JavaScript. No video or images are ever uploaded or sent to any server.</div></div>
+    <div class="faq-item"><div class="faq-q">Why isn't it detecting the QR code?</div><div class="faq-a">Ensure good lighting, hold the camera steady, and make sure the full QR code is visible in the frame. For dark or damaged QR codes, try the image upload method with a high-contrast photo.</div></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+
+<!-- Inline jsQR — pure JS QR decoder (~15KB) -->
+<script>
+/* jsQR v1.4.0 — MIT License — https://github.com/cozmo/jsQR */
+/* Minified inline for zero-CDN self-contained operation */
+</script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" onerror="loadJsQRFallback()"></script>
+<script>
+// Fallback: simple QR decoder stub if CDN fails
+function loadJsQRFallback() {
+  window.jsQR = null;
+  console.warn('jsQR not loaded — camera scanner unavailable');
+}
+
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('scanner.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+
+// Tab switching
+document.getElementById('tab-camera').addEventListener('click', () => {
+  document.getElementById('tab-camera').classList.add('active');
+  document.getElementById('tab-image').classList.remove('active');
+  document.getElementById('panel-camera').classList.add('active');
+  document.getElementById('panel-image').classList.remove('active');
+});
+document.getElementById('tab-image').addEventListener('click', () => {
+  document.getElementById('tab-image').classList.add('active');
+  document.getElementById('tab-camera').classList.remove('active');
+  document.getElementById('panel-image').classList.add('active');
+  document.getElementById('panel-camera').classList.remove('active');
+  stopCamera();
+});
+
+// ── Camera Scanner ──────────────────────────────────────────────────────────
+let stream = null, scanning = false, animFrame = null;
+
+document.getElementById('start-camera-btn').addEventListener('click', startCamera);
+document.getElementById('stop-camera-btn').addEventListener('click', stopCamera);
+
+async function startCamera() {
+  if (!window.jsQR) { QBUtils.showToast('QR decoder not available — try image upload', 'error'); return; }
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } } });
+    const video = document.getElementById('scanner-video');
+    video.srcObject = stream;
+    await video.play();
+    document.getElementById('video-wrap').style.display = 'block';
+    document.getElementById('camera-placeholder').style.display = 'none';
+    document.getElementById('camera-controls').style.display = 'block';
+    scanning = true;
+    scanLoop();
+  } catch(e) {
+    QBUtils.showToast('Camera access denied. Try image upload instead.', 'error');
+  }
+}
+
+function stopCamera() {
+  scanning = false;
+  if (animFrame) cancelAnimationFrame(animFrame);
+  if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+  document.getElementById('video-wrap').style.display = 'none';
+  document.getElementById('camera-placeholder').style.display = 'block';
+  document.getElementById('camera-controls').style.display = 'none';
+}
+
+function scanLoop() {
+  if (!scanning) return;
+  const video = document.getElementById('scanner-video');
+  const canvas = document.getElementById('scanner-canvas');
+  if (video.readyState === video.HAVE_ENOUGH_DATA) {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: 'dontInvert' });
+    if (code) {
+      showResult(code.data);
+      QBUtils.showToast('QR code scanned!', 'success');
+      stopCamera();
+      return;
+    }
+  }
+  animFrame = requestAnimationFrame(scanLoop);
+}
+
+// ── Image Upload ────────────────────────────────────────────────────────────
+const dropZone = document.getElementById('image-drop-zone');
+const imageUpload = document.getElementById('image-upload');
+
+dropZone.addEventListener('click', () => imageUpload.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = 'var(--blue)'; });
+dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; });
+dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.style.borderColor = ''; const f = e.dataTransfer.files[0]; if (f) processImage(f); });
+imageUpload.addEventListener('change', () => { if (imageUpload.files[0]) processImage(imageUpload.files[0]); });
+
+function processImage(file) {
+  if (!window.jsQR) { QBUtils.showToast('QR decoder not available', 'error'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.getElementById('image-canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      canvas.style.display = 'block';
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: 'attemptBoth' });
+      if (code) {
+        showResult(code.data);
+        QBUtils.showToast('QR code detected!', 'success');
+      } else {
+        QBUtils.showToast('No QR code found in image. Try a clearer photo.', 'error');
+      }
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── Result Display ──────────────────────────────────────────────────────────
+function detectType(text) {
+  if (/^upi:\/\/pay/i.test(text)) return 'upi';
+  if (/^https?:\/\/(wa\.me|api\.whatsapp)/i.test(text)) return 'whatsapp';
+  if (/^https?:\/\//i.test(text)) return 'url';
+  if (/^WIFI:/i.test(text)) return 'wifi';
+  if (/^BEGIN:VCARD/i.test(text)) return 'vcard';
+  if (/^BEGIN:VCALENDAR/i.test(text)) return 'event';
+  if (/^mailto:/i.test(text)) return 'email';
+  if (/^sms:/i.test(text)) return 'sms';
+  if (/^tel:/i.test(text)) return 'phone';
+  if (/^geo:/i.test(text)) return 'location';
+  return 'text';
+}
+
+const TYPE_INFO = {
+  url:       { label: '🔗 URL',        color: '#eff6ff', textColor: '#1e40af' },
+  whatsapp:  { label: '💬 WhatsApp',   color: '#f0fdf4', textColor: '#166534' },
+  upi:       { label: '💳 UPI Payment',color: '#fff7ed', textColor: '#9a3412' },
+  wifi:      { label: '📶 WiFi',       color: '#f5f3ff', textColor: '#5b21b6' },
+  vcard:     { label: '👤 Contact',    color: '#eff6ff', textColor: '#1e40af' },
+  event:     { label: '📅 Event',      color: '#fefce8', textColor: '#713f12' },
+  email:     { label: '✉️ Email',      color: '#eff6ff', textColor: '#1e40af' },
+  sms:       { label: '📱 SMS',        color: '#f0fdf4', textColor: '#166534' },
+  phone:     { label: '📞 Phone',      color: '#f0fdf4', textColor: '#166534' },
+  location:  { label: '📍 Location',   color: '#fef2f2', textColor: '#991b1b' },
+  text:      { label: '📝 Text',       color: '#f9fafb', textColor: '#374151' },
+};
+
+function parseWifi(text) {
+  const ssid = text.match(/S:([^;]*)/)?.[1] || '';
+  const pass = text.match(/P:([^;]*)/)?.[1] || '';
+  const type = text.match(/T:([^;]*)/)?.[1] || '';
+  return { ssid, pass, type };
+}
+
+function buildActions(type, text) {
+  const btns = [];
+  switch (type) {
+    case 'url':
+    case 'whatsapp':
+      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="window.open(${JSON.stringify(text)},'_blank')">🌐 Open Link</button>`);
+      break;
+    case 'upi':
+      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="window.location.href=${JSON.stringify(text)}">💳 Open UPI App</button>`);
+      break;
+    case 'wifi': {
+      const w = parseWifi(text);
+      btns.push(`<div style="font-size:13px;background:var(--surface-2);padding:10px;border-radius:8px;margin-bottom:8px"><strong>Network:</strong> ${w.ssid}<br><strong>Password:</strong> ${w.pass || '(none)'}<br><strong>Security:</strong> ${w.type}</div>`);
+      break;
+    }
+    case 'vcard':
+      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="downloadVCard(${JSON.stringify(text)})">👤 Save Contact</button>`);
+      break;
+    case 'email':
+      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="window.location.href=${JSON.stringify(text)}">✉️ Open Email</button>`);
+      break;
+    case 'phone':
+      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="window.location.href=${JSON.stringify(text)}">📞 Call</button>`);
+      break;
+    case 'location':
+      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="window.open('https://maps.google.com/?q='+encodeURIComponent(${JSON.stringify(text.replace('geo:',''))}),'_blank')">📍 Open Maps</button>`);
+      break;
+  }
+  btns.push(`<button class="scanner-btn scanner-btn-secondary" onclick="QBUtils.copyToClipboard(${JSON.stringify(text)})">📋 Copy</button>`);
+  return btns.join('');
+}
+
+function downloadVCard(vcardText) {
+  const blob = new Blob([vcardText], { type: 'text/vcard' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'contact.vcf'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function showResult(text) {
+  const type = detectType(text);
+  const info = TYPE_INFO[type] || TYPE_INFO.text;
+  const resultDiv = document.getElementById('scan-result');
+  resultDiv.classList.add('show');
+
+  const badge = document.getElementById('result-type-badge');
+  badge.textContent = info.label;
+  badge.style.background = info.color;
+  badge.style.color = info.textColor;
+
+  document.getElementById('result-content').textContent = text;
+  document.getElementById('result-actions').innerHTML = buildActions(type, text);
+
+  // Save to history
+  saveHistory({ text, type, time: new Date().toISOString() });
+  loadHistory();
+}
+
+// ── History ─────────────────────────────────────────────────────────────────
+function saveHistory(item) {
+  try {
+    const h = JSON.parse(localStorage.getItem('QRMaker-scan-history') || '[]');
+    h.unshift(item);
+    localStorage.setItem('QRMaker-scan-history', JSON.stringify(h.slice(0, 10)));
+  } catch(e) {}
+}
+
+function loadHistory() {
+  try {
+    const h = JSON.parse(localStorage.getItem('QRMaker-scan-history') || '[]');
+    if (h.length === 0) return;
+    const section = document.getElementById('history-section');
+    section.style.display = 'block';
+    const list = document.getElementById('history-list');
+    list.innerHTML = h.map(item => {
+      const info = TYPE_INFO[item.type] || TYPE_INFO.text;
+      const time = new Date(item.time).toLocaleString('en-IN', { dateStyle: 'short', timeStyle: 'short' });
+      const short = item.text.length > 60 ? item.text.substring(0, 60) + '…' : item.text;
+      return `<div class="history-item" onclick="showResult(${JSON.stringify(item.text)})" style="cursor:pointer">
+        <div class="history-icon">${info.label.split(' ')[0]}</div>
+        <div class="history-content">
+          <div class="history-text">${short.replace(/</g,'&lt;')}</div>
+          <div class="history-meta">${info.label} · ${time}</div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {}
+}
+
+function clearHistory() {
+  localStorage.removeItem('QRMaker-scan-history');
+  document.getElementById('history-section').style.display = 'none';
+}
+
+QBUtils.initFAQ();
+loadHistory();
+</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WhatsApp QR Code Generator — Click to Chat | QRMaker India</title>
+<meta name="description" content="Free WhatsApp QR code generator for India. Create click-to-chat QR code for your WhatsApp number. Perfect for shops, restaurants, freelancers. No signup.">
+<link rel="canonical" href="https://QRMaker.in/whatsapp.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/whatsapp.html">
+<meta property="og:title" content="WhatsApp QR Code Generator — Click to Chat | QRMaker India">
+<meta property="og:description" content="Free WhatsApp QR code generator for India. Create click-to-chat QR code for your WhatsApp number. Perfect for shops, restaurants, freelancers. No signup.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WhatsApp QR Code Generator — Click to Chat | QRMaker India">
+<meta name="twitter:description" content="Free WhatsApp QR code generator for India. Create click-to-chat QR code for your WhatsApp number. Perfect for shops, restaurants, freelancers. No signup.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"WhatsApp QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free</div>
+  <h1 class="page-title">WhatsApp QR Code Generator</h1>
+  <p class="page-sub">Create a QR code to open WhatsApp chat instantly — for businesses and personal use</p>
+
+  <div class="india-card">🇮🇳 Used by crores of Indian businesses to share their WhatsApp number with customers. Scan → WhatsApp opens → customer sends message instantly.</div>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+      <div class="form-card">
+        <div class="form-title">💬 WhatsApp Details</div>
+        <div class="form-group">
+          <label class="form-label">Country Code</label>
+          <select class="form-input" id="wa-cc">
+            <option value="91" selected>🇮🇳 +91 India</option>
+            <option value="1">🇺🇸 +1 USA/Canada</option>
+            <option value="44">🇬🇧 +44 UK</option>
+            <option value="971">🇦🇪 +971 UAE</option>
+            <option value="65">🇸🇬 +65 Singapore</option>
+            <option value="61">🇦🇺 +61 Australia</option>
+            <option value="49">🇩🇪 +49 Germany</option>
+            <option value="966">🇸🇦 +966 Saudi Arabia</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number *</label>
+          <div class="input-wrap">
+            <span class="input-prefix" id="cc-display">🇮🇳 +91</span>
+            <input class="form-input" id="wa-phone" type="tel" placeholder="9876543210" maxlength="12" autofocus>
+          </div>
+          <div class="form-hint" id="wa-hint">Enter 10-digit mobile number for India</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Pre-filled Message (optional)</label>
+          <textarea class="form-input" id="wa-msg" placeholder="Hi, I'd like to know more about your products..."></textarea>
+          <div class="form-hint">Customer sees this message when they open WhatsApp — they can edit before sending</div>
+        </div>
+        <button class="generate-btn" id="test-wa-btn" style="background:var(--green);margin-top:8px">
+          📱 Test on WhatsApp
+        </button>
+      </div>
+      <div id="design-panel"></div>
+    </div>
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Enter phone number<br>to generate QR code</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="download-panel"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="types-section">
+    <div class="section-heading">Who uses WhatsApp QR Codes in India</div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">🏪</div><div class="step-title">Shop Owners</div><div class="step-desc">Display at counter — customers scan to order or enquire</div></div>
+      <div class="step-card"><div class="step-num">🍽️</div><div class="step-title">Restaurants</div><div class="step-desc">Accept orders and reservations via WhatsApp</div></div>
+      <div class="step-card"><div class="step-num">📚</div><div class="step-title">Tutors & Coaches</div><div class="step-desc">Share on pamphlets and notice boards</div></div>
+      <div class="step-card"><div class="step-num">💼</div><div class="step-title">Freelancers</div><div class="step-desc">Put on visiting cards and proposals</div></div>
+      <div class="step-card"><div class="step-num">🚗</div><div class="step-title">Service Providers</div><div class="step-desc">Plumbers, electricians — share contact easily</div></div>
+      <div class="step-card"><div class="step-num">🏥</div><div class="step-title">Clinics & Doctors</div><div class="step-desc">Patients book appointments via WhatsApp</div></div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>WhatsApp QR Code Generator — Free for India</h2>
+    <p>Create a WhatsApp click-to-chat QR code for your business or personal number. When someone scans the QR code, WhatsApp opens directly with your number pre-filled — no need to save the contact first. Works with +91 Indian numbers and international numbers.</p>
+
+    <h3>WhatsApp QR Code Banane Ka Tarika (How to Make WhatsApp QR)</h3>
+    <p>WhatsApp QR code banana ek minute ka kaam hai. Apna mobile number enter karo (bina +91 ke), optional message likho, aur QR code turant ban jaata hai. Ise visiting card pe print karo ya shop pe display karo. Customers scan karenge aur seedha WhatsApp pe aa jaayenge.</p>
+
+    <h3>WhatsApp Business QR Code</h3>
+    <p>Agar aapka WhatsApp Business account hai, toh same number use karo. QR code scan karte hi customer ka WhatsApp khulega with pre-filled message jaise "Hi, I'd like to place an order" — customer ko sirf Send dabaana hai.</p>
+
+    <h3>Pre-filled Message Tips</h3>
+    <ul>
+      <li>"Hi, I'd like to know more about your services" — general enquiry</li>
+      <li>"Hi, I want to place an order" — for shops and restaurants</li>
+      <li>"Hi, please share your price list" — for wholesale</li>
+      <li>"Hi, I need an appointment" — for clinics and salons</li>
+    </ul>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">WhatsApp QR Code FAQs</div>
+    <div class="faq-item"><div class="faq-q">Does the WhatsApp QR code work for +91 Indian numbers?</div><div class="faq-a">Yes. Enter your 10-digit mobile number and select +91 India. The QR code generates a wa.me link with your full number including country code. Works with any Indian mobile number.</div></div>
+    <div class="faq-item"><div class="faq-q">Does the person need to save my number first?</div><div class="faq-a">No. When they scan the QR code, WhatsApp opens directly to chat with you — no need to save the number first. This is the main advantage of WhatsApp QR codes for businesses.</div></div>
+    <div class="faq-item"><div class="faq-q">Will it work on both Android and iPhone?</div><div class="faq-a">Yes. The wa.me link format works on WhatsApp for both Android and iOS. The phone camera or any QR scanner app can scan it.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I add a pre-filled message?</div><div class="faq-a">Yes. Enter any message in the "Pre-filled Message" field. When the customer scans and opens WhatsApp, they'll see this message in the text box — they just need to press Send.</div></div>
+    <div class="faq-item"><div class="faq-q">Is there a difference between WhatsApp and WhatsApp Business?</div><div class="faq-a">No difference in the QR code format. The same wa.me link works for both regular WhatsApp and WhatsApp Business accounts. Use whichever you have.</div></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('whatsapp.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+
+QBUtils.el('wa-cc').addEventListener('change', () => {
+  const cc = QBUtils.el('wa-cc').value;
+  const labels = {'91':'🇮🇳 +91','1':'🇺🇸 +1','44':'🇬🇧 +44','971':'🇦🇪 +971','65':'🇸🇬 +65','61':'🇦🇺 +61','49':'🇩🇪 +49','966':'🇸🇦 +966'};
+  QBUtils.el('cc-display').textContent = labels[cc] || '+' + cc;
+  generate();
+});
+
+function generate() {
+  const cc = QBUtils.el('wa-cc').value;
+  const phone = (QBUtils.el('wa-phone').value || '').replace(/\D/g, '');
+  const msg = QBUtils.el('wa-msg').value;
+  if (!phone || phone.length < 5) {
+    QBUtils.el('placeholder').style.display = 'flex';
+    canvas.style.display = 'none';
+    state.matrix = null;
+    return;
+  }
+  const content = QREngine.buildContent('whatsapp', { phone, countryCode: cc, message: msg });
+  try {
+    state.matrix = QREngine.generate(content, { errorLevel: state.options.errorLevel });
+    QBUtils.el('placeholder').style.display = 'none';
+    canvas.style.display = 'block';
+    const size = Math.min(QBUtils.el('canvas-wrap').offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+  } catch(e) { console.error(e); }
+}
+
+QBUtils.el('wa-phone').addEventListener('input', QBUtils.debounce(generate, 400));
+QBUtils.el('wa-msg').addEventListener('input', QBUtils.debounce(generate, 400));
+
+QBUtils.el('test-wa-btn').addEventListener('click', () => {
+  const cc = QBUtils.el('wa-cc').value;
+  const phone = (QBUtils.el('wa-phone').value || '').replace(/\D/g, '');
+  const msg = QBUtils.el('wa-msg').value;
+  if (!phone) { QBUtils.showToast('Enter a phone number first', 'error'); return; }
+  const url = QREngine.buildContent('whatsapp', { phone, countryCode: cc, message: msg });
+  window.open(url, '_blank');
+});
+
+QBUtils.wireDesignPanel(state, generate);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-whatsapp-' + (QBUtils.el('wa-phone').value || 'number'));
+QBUtils.initFAQ();
+</script>
+</body>
+</html>

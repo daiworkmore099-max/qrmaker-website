@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Media QR Code Generator — All Platforms | QRMaker</title>
+<meta name="description" content="Free social media QR code generator. Create QR codes for Instagram, YouTube, LinkedIn, Twitter, Telegram. No signup, no watermark.">
+<link rel="canonical" href="https://QRMaker.in/social.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/social.html">
+<meta property="og:title" content="Social Media QR Code Generator — All Platforms | QRMaker">
+<meta property="og:description" content="Free social media QR code generator. Create QR codes for Instagram, YouTube, LinkedIn, Twitter, Telegram. No signup, no watermark.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Social Media QR Code Generator — All Platforms | QRMaker">
+<meta name="twitter:description" content="Free social media QR code generator. Create QR codes for Instagram, YouTube, LinkedIn, Twitter, Telegram. No signup, no watermark.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Social Media QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free</div>
+  <h1 class="page-title">Social Media QR Code Generator</h1>
+  <p class="page-sub">Create QR codes for Instagram, YouTube, LinkedIn and all social profiles</p>
+
+  <div class="generator-layout">
+    <div class="generator-left">
+
+      <div class="type-tabs" id="platform-tabs" style="grid-template-columns:repeat(auto-fill,minmax(80px,1fr))">
+        <button class="type-tab active" data-platform="instagram"><span class="type-tab-icon">📷</span><span class="type-tab-label">Instagram</span></button>
+        <button class="type-tab" data-platform="youtube"><span class="type-tab-icon">▶️</span><span class="type-tab-label">YouTube</span></button>
+        <button class="type-tab" data-platform="linkedin"><span class="type-tab-icon">💼</span><span class="type-tab-label">LinkedIn</span></button>
+        <button class="type-tab" data-platform="twitter"><span class="type-tab-icon">🐦</span><span class="type-tab-label">Twitter</span></button>
+        <button class="type-tab" data-platform="telegram"><span class="type-tab-icon">✈️</span><span class="type-tab-label">Telegram</span></button>
+        <button class="type-tab" data-platform="whatsapp"><span class="type-tab-icon">💬</span><span class="type-tab-label">WhatsApp</span></button>
+      </div>
+
+      <div id="social-form-area"></div>
+      <div id="design-panel"></div>
+    </div>
+
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Enter username to<br>generate QR code</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="url-display" style="display:none;font-size:11px;color:var(--text-3);word-break:break-all;margin-bottom:8px;text-align:center"></div>
+        <div id="download-panel"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>Social Media QR Code Generator — Free</h2>
+    <p>Create QR codes for all your social media profiles. Print on business cards, flyers, shop boards, and merchandise. Anyone who scans follows you directly — no searching required.</p>
+    <h3>Instagram QR Code Kaise Banaye</h3>
+    <p>Apna Instagram username enter karo (@ ke bina bhi chal jaata hai). QR code ban jaata hai. Print karo — log scan karein aur seedha aapka Instagram profile khul jaata hai. Follow karna ek tap ka kaam ho jaata hai.</p>
+    <h3>YouTube Channel QR Code</h3>
+    <p>YouTube channel URL paste karo. QR code scan karne pe directly channel khulta hai. Video, playlist ya channel — kisi bhi URL ka QR ban sakta hai.</p>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">Social Media QR Code FAQs</div>
+    <div class="faq-item"><div class="faq-q">Will it open the app or browser?</div><div class="faq-a">If the social media app (Instagram, YouTube, etc.) is installed, the phone usually opens it directly. Otherwise it opens in the browser.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I make a QR for my Instagram Reel or post?</div><div class="faq-a">Yes — use the URL type and paste the direct URL of your reel or post. Or use the Instagram option and enter your profile username.</div></div>
+    <div class="faq-item"><div class="faq-q">Does it work for YouTube Shorts?</div><div class="faq-a">Yes. Paste the full YouTube Shorts URL and it will open that short when scanned.</div></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('social.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+
+const PLATFORMS = {
+  instagram: { label: 'Instagram', icon: '📷', placeholder: 'username (without @)', hint: 'Opens instagram.com/username' },
+  youtube:   { label: 'YouTube',   icon: '▶️', placeholder: 'https://youtube.com/@channelname', hint: 'Paste full YouTube channel or video URL', isUrl: true },
+  linkedin:  { label: 'LinkedIn',  icon: '💼', placeholder: 'username or linkedin.com/in/username', hint: 'Opens your LinkedIn profile' },
+  twitter:   { label: 'Twitter/X', icon: '🐦', placeholder: 'username (without @)', hint: 'Opens twitter.com/username' },
+  telegram:  { label: 'Telegram',  icon: '✈️', placeholder: 'username (without @)', hint: 'Opens t.me/username' },
+  whatsapp:  { label: 'WhatsApp',  icon: '💬', placeholder: '91XXXXXXXXXX (with country code)', hint: 'Opens WhatsApp chat', isPhone: true },
+};
+
+let currentPlatform = 'instagram';
+
+function buildForm(p) {
+  const cfg = PLATFORMS[p];
+  return `<div class="form-card">
+    <div class="form-title">${cfg.icon} ${cfg.label} QR Code</div>
+    <div class="form-group">
+      <label class="form-label">${cfg.isUrl ? 'Profile or Video URL' : cfg.isPhone ? 'Phone Number' : 'Username'} *</label>
+      <input class="form-input large" id="social-input" type="${cfg.isUrl ? 'url' : 'text'}" placeholder="${cfg.placeholder}" autocomplete="off" autofocus>
+      <div class="form-hint">${cfg.hint}</div>
+    </div>
+  </div>`;
+}
+
+function getContent(platform, value) {
+  const v = (value || '').trim();
+  if (!v) return '';
+  switch (platform) {
+    case 'instagram': return QREngine.buildContent('instagram', { username: v });
+    case 'youtube':   return v.startsWith('http') ? v : 'https://youtube.com/@' + v;
+    case 'linkedin':  return QREngine.buildContent('linkedin', { username: v });
+    case 'twitter':   return QREngine.buildContent('twitter', { username: v });
+    case 'telegram':  return QREngine.buildContent('telegram', { username: v });
+    case 'whatsapp':  return QREngine.buildContent('whatsapp', { phone: v.replace(/\D/g,''), countryCode: '' });
+    default: return v;
+  }
+}
+
+function generate() {
+  const input = QBUtils.el('social-input');
+  if (!input) return;
+  const value = input.value;
+  if (!value.trim()) { QBUtils.el('placeholder').style.display = 'flex'; canvas.style.display = 'none'; state.matrix = null; QBUtils.el('url-display').style.display = 'none'; return; }
+  const content = getContent(currentPlatform, value);
+  if (!content) return;
+  QBUtils.el('url-display').textContent = content;
+  QBUtils.el('url-display').style.display = 'block';
+  try {
+    state.matrix = QREngine.generate(content, { errorLevel: state.options.errorLevel });
+    QBUtils.el('placeholder').style.display = 'none';
+    canvas.style.display = 'block';
+    const size = Math.min(QBUtils.el('canvas-wrap').offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+  } catch(e) { console.error(e); }
+}
+
+function switchPlatform(p) {
+  currentPlatform = p;
+  document.querySelectorAll('[data-platform]').forEach(t => t.classList.toggle('active', t.dataset.platform === p));
+  QBUtils.el('social-form-area').innerHTML = buildForm(p);
+  QBUtils.el('social-input').addEventListener('input', QBUtils.debounce(generate, 400));
+  QBUtils.el('placeholder').style.display = 'flex';
+  canvas.style.display = 'none';
+  state.matrix = null;
+}
+
+document.querySelectorAll('[data-platform]').forEach(tab => tab.addEventListener('click', () => switchPlatform(tab.dataset.platform)));
+switchPlatform('instagram');
+
+QBUtils.wireDesignPanel(state, generate);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-' + currentPlatform + '-' + (QBUtils.el('social-input')?.value || '').replace(/[^a-z0-9]/gi,'-').substring(0,20));
+QBUtils.initFAQ();
+</script>
+</body>
+</html>

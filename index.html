@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free QR Code Generator — QRMaker | No Signup, No Watermark</title>
+<meta name="description" content="Free QR code generator — URL, WhatsApp, UPI payment, WiFi, vCard and more. No signup, no watermark. India's best free QR generator with logo support and SVG download.">
+<link rel="canonical" href="https://QRMaker.in/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/">
+<meta property="og:title" content="Free QR Code Generator — QRMaker | No Signup, No Watermark">
+<meta property="og:description" content="Free QR code generator — URL, WhatsApp, UPI payment, WiFi, vCard and more. No signup, no watermark. India's best free QR generator with logo support and SVG download.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free QR Code Generator — QRMaker | No Signup, No Watermark">
+<meta name="twitter:description" content="Free QR code generator — URL, WhatsApp, UPI payment, WiFi, vCard and more. No signup, no watermark. India's best free QR generator with logo support and SVG download.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"QRMaker","url":"https://QRMaker.in","potentialAction":{"@type":"SearchAction","target":"https://QRMaker.in/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free — Forever</div>
+  <h1 class="page-title">Free QR Code Generator</h1>
+  <p class="page-sub">Create QR codes for URL, WhatsApp, UPI payment, WiFi and more — free, no signup, no limits</p>
+
+  <div class="generator-layout">
+    <!-- LEFT: Type selector + form -->
+    <div class="generator-left">
+      <div class="type-tabs" id="type-tabs">
+        <button class="type-tab active" data-type="url"><span class="type-tab-icon">🔗</span><span class="type-tab-label">URL</span></button>
+        <button class="type-tab" data-type="whatsapp"><span class="type-tab-icon">💬</span><span class="type-tab-label">WhatsApp</span></button>
+        <button class="type-tab" data-type="upi"><span class="type-tab-icon">💳</span><span class="type-tab-label">UPI Pay</span></button>
+        <button class="type-tab" data-type="wifi"><span class="type-tab-icon">📶</span><span class="type-tab-label">WiFi</span></button>
+        <button class="type-tab" data-type="vcard"><span class="type-tab-icon">👤</span><span class="type-tab-label">vCard</span></button>
+        <button class="type-tab" data-type="email"><span class="type-tab-icon">✉️</span><span class="type-tab-label">Email</span></button>
+        <button class="type-tab" data-type="sms"><span class="type-tab-icon">💬</span><span class="type-tab-label">SMS</span></button>
+        <button class="type-tab" data-type="text"><span class="type-tab-icon">📝</span><span class="type-tab-label">Text</span></button>
+      </div>
+
+      <!-- Dynamic form area -->
+      <div id="form-area"></div>
+
+      <!-- Design panel -->
+      <div id="design-panel"></div>
+    </div>
+
+    <!-- RIGHT: Preview -->
+    <div class="generator-right">
+      <div class="preview-card">
+        <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">QR Preview</div>
+        <div class="qr-canvas-wrap" id="canvas-wrap">
+          <div class="qr-placeholder" id="placeholder">Enter details to<br>generate QR code</div>
+          <canvas id="qr-canvas" style="display:none"></canvas>
+        </div>
+        <div class="qr-size-label" id="size-label"></div>
+        <div id="download-panel"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Type Categories -->
+  <div class="types-section">
+    <div class="section-heading">📱 Communication</div>
+    <div class="types-grid">
+      <a href="url.html" class="type-card"><span class="type-card-icon">🔗</span><div class="type-card-name">URL / Website</div><div class="type-card-desc">Link to any webpage</div></a>
+      <a href="whatsapp.html" class="type-card"><span class="type-card-icon">💬</span><div class="type-card-name">WhatsApp</div><div class="type-card-desc">Click to chat QR</div></a>
+      <a href="email.html" class="type-card"><span class="type-card-icon">✉️</span><div class="type-card-name">Email</div><div class="type-card-desc">Pre-filled email draft</div></a>
+      <a href="sms.html" class="type-card"><span class="type-card-icon">📱</span><div class="type-card-name">SMS</div><div class="type-card-desc">Send pre-written SMS</div></a>
+      <a href="text.html" class="type-card"><span class="type-card-icon">📝</span><div class="type-card-name">Plain Text</div><div class="type-card-desc">Any text message</div></a>
+    </div>
+  </div>
+
+  <div class="types-section">
+    <div class="section-heading">🇮🇳 India Specific</div>
+    <div class="types-grid">
+      <a href="upi.html" class="type-card">
+        <span class="india-badge">🇮🇳 India</span>
+        <span class="type-card-icon">💳</span>
+        <div class="type-card-name">UPI Payment</div>
+        <div class="type-card-desc">GPay, PhonePe, Paytm, BHIM</div>
+      </a>
+      <a href="whatsapp.html" class="type-card">
+        <span class="india-badge">🇮🇳 India</span>
+        <span class="type-card-icon">🏪</span>
+        <div class="type-card-name">WhatsApp Business</div>
+        <div class="type-card-desc">Shop & business QR</div>
+      </a>
+      <a href="restaurant.html" class="type-card">
+        <span class="india-badge">🇮🇳 India</span>
+        <span class="type-card-icon">🍽️</span>
+        <div class="type-card-name">Restaurant Menu</div>
+        <div class="type-card-desc">Digital menu QR</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="types-section">
+    <div class="section-heading">🔧 Technical & Contact</div>
+    <div class="types-grid">
+      <a href="wifi.html" class="type-card"><span class="type-card-icon">📶</span><div class="type-card-name">WiFi</div><div class="type-card-desc">Share WiFi password</div></a>
+      <a href="vcard.html" class="type-card"><span class="type-card-icon">👤</span><div class="type-card-name">vCard / Contact</div><div class="type-card-desc">Digital business card</div></a>
+      <a href="location.html" class="type-card"><span class="type-card-icon">📍</span><div class="type-card-name">Location</div><div class="type-card-desc">Google Maps QR</div></a>
+      <a href="event.html" class="type-card"><span class="type-card-icon">📅</span><div class="type-card-name">Calendar Event</div><div class="type-card-desc">Add event to calendar</div></a>
+    </div>
+  </div>
+
+  <div class="types-section">
+    <div class="section-heading">📱 Social Media</div>
+    <div class="types-grid">
+      <a href="social.html" class="type-card"><span class="type-card-icon">📷</span><div class="type-card-name">Instagram</div><div class="type-card-desc">Profile QR code</div></a>
+      <a href="social.html" class="type-card"><span class="type-card-icon">▶️</span><div class="type-card-name">YouTube</div><div class="type-card-desc">Channel / video QR</div></a>
+      <a href="social.html" class="type-card"><span class="type-card-icon">💼</span><div class="type-card-name">LinkedIn</div><div class="type-card-desc">Profile QR code</div></a>
+      <a href="social.html" class="type-card"><span class="type-card-icon">🐦</span><div class="type-card-name">Twitter / X</div><div class="type-card-desc">Profile QR code</div></a>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features-grid" style="margin-top:3rem">
+    <div class="feature-item">
+      <div class="feature-item-icon">✅</div>
+      <div class="feature-item-title">Free SVG Download</div>
+      <div class="feature-item-desc">Vector quality for print — free forever. Competitors charge ₹500+/month.</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-item-icon">🎨</div>
+      <div class="feature-item-title">Custom Logo — Free</div>
+      <div class="feature-item-desc">Add your brand logo inside the QR code. No signup, no watermark.</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-item-icon">🇮🇳</div>
+      <div class="feature-item-title">UPI QR — India Exclusive</div>
+      <div class="feature-item-desc">Generate UPI payment QR for GPay, PhonePe, Paytm — nobody else offers this free.</div>
+    </div>
+  </div>
+
+  <!-- SEO Content -->
+  <div class="seo-content">
+    <h2>Free QR Code Generator Online — QRMaker</h2>
+    <p>QRMaker is India's most complete free QR code generator. Create QR codes for websites, WhatsApp, UPI payments, WiFi passwords, business cards, and more — completely free with no signup required and no watermark ever.</p>
+
+    <h3>What is a QR Code?</h3>
+    <p>A QR (Quick Response) code is a two-dimensional barcode that can be scanned by any smartphone camera. When scanned, it instantly opens a website, starts a WhatsApp chat, initiates a UPI payment, connects to WiFi, or performs any other programmed action.</p>
+
+    <h3>Why QRMaker is Better Than Other QR Generators</h3>
+    <p>Most QR code generators make you sign up, add a watermark to your QR code, or charge money for basic features like SVG download or adding a logo. QRMaker is different — everything is free, forever:</p>
+    <ul>
+      <li><strong>No signup required</strong> — generate QR codes instantly, no account needed</li>
+      <li><strong>No watermark</strong> — your QR code is clean and professional</li>
+      <li><strong>SVG download free</strong> — vector format for perfect quality at any print size</li>
+      <li><strong>Custom logo free</strong> — add your brand logo inside the QR code</li>
+      <li><strong>UPI payment QR</strong> — exclusive India feature, accept payments via GPay, PhonePe, Paytm</li>
+      <li><strong>Built-in scanner</strong> — scan QR codes from camera or image upload</li>
+    </ul>
+
+    <h3>Free QR Code Kaise Banaye (How to Make Free QR Code)</h3>
+    <p>QRMaker pe free QR code banana bahut aasaan hai. Simply apna type select karo (URL, WhatsApp, UPI), details fill karo, aur QR code turant generate ho jaata hai. Download PNG ya SVG format mein — bilkul free, koi account banana zaroori nahi.</p>
+
+    <h3>UPI QR Code Generator for Indian Businesses</h3>
+    <p>India mein UPI payments bahut popular hain. GPay, PhonePe, Paytm, BHIM — sabhi ke liye ek hi UPI QR code kaam karta hai. QRMaker pe apna UPI ID (jaise yourname@okicici) enter karo aur instantly payment QR code generate karo. Dukandaaron, restaurants, freelancers — sabke liye perfect.</p>
+
+    <h3>WhatsApp QR Code for Business</h3>
+    <p>India mein WhatsApp sabse zyada use hone wala messaging app hai. Apne WhatsApp number ka QR code banao taki customers ek scan mein aapko message kar sakein. Pre-filled message bhi add kar sakte ho.</p>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">Frequently Asked Questions</div>
+    <div class="faq-item"><div class="faq-q">Is QRMaker completely free?</div><div class="faq-a">Yes, 100% free. No signup required. No watermark. No hidden charges. SVG download, custom logo, all features — all free forever.</div></div>
+    <div class="faq-item"><div class="faq-q">Do QR codes expire?</div><div class="faq-a">Static QR codes (like URL, WhatsApp, UPI) never expire. The QR code will always work as long as the destination URL or content is valid. There are no expiry dates on QRMaker-generated codes.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I add a logo to my QR code?</div><div class="faq-a">Yes! Use the "Logo" option in the design panel. Upload any image (PNG, JPG, SVG) and it will appear in the center of your QR code. This is completely free on QRMaker — competitors charge for this feature.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I download as SVG for printing?</div><div class="faq-a">Yes. Click "Download SVG" to get a vector file that prints at any size without blurring. Perfect for banners, visiting cards, hoardings. Free on QRMaker — competitors charge ₹1000+/month for SVG export.</div></div>
+    <div class="faq-item"><div class="faq-q">What is UPI QR Code?</div><div class="faq-a">A UPI QR code allows customers to pay you instantly using any UPI app — Google Pay, PhonePe, Paytm, BHIM, or any bank UPI app. When scanned, the payment app opens with your UPI ID and amount pre-filled. QRMaker is the only free generator for UPI QR codes.</div></div>
+    <div class="faq-item"><div class="faq-q">How do I create a WhatsApp QR code?</div><div class="faq-a">Click on "WhatsApp" in the type selector. Enter your mobile number (with country code +91 for India), optionally add a pre-filled message, and the QR code is instantly generated. Anyone who scans it will be taken directly to a WhatsApp chat with you.</div></div>
+    <div class="faq-item"><div class="faq-q">Does the QR code work in India?</div><div class="faq-a">Yes, all QR codes generated by QRMaker work with standard smartphone cameras in India. UPI QR codes work with all Indian UPI apps. WhatsApp QR codes work with +91 numbers. WiFi QR codes work with Android and iOS.</div></div>
+    <div class="faq-item"><div class="faq-q">Is my data safe?</div><div class="faq-a">Yes. All QR code generation happens entirely in your browser — no data is sent to any server. Your UPI ID, phone number, WiFi password — nothing is uploaded or stored anywhere.</div></div>
+    <div class="faq-item"><div class="faq-q">What size should I print my QR code?</div><div class="faq-a">Minimum 2.5 cm × 2.5 cm for scanning at close range. For outdoor display (shop front, banner), use at least 10 cm × 10 cm. Download 2048px PNG or SVG for best print quality.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I customize the QR code color?</div><div class="faq-a">Yes! Use the design panel to change the foreground and background colors, choose dot styles (square, rounded, dots), and eye styles. Keep foreground dark and background light for best scanning reliability.</div></div>
+    <div class="faq-item"><div class="faq-q">What is the difference between PNG and SVG?</div><div class="faq-a">PNG is a pixel image — great for digital use and general printing. SVG is a vector file — scales to any size without quality loss, perfect for large format printing. Both are free on QRMaker.</div></div>
+    <div class="faq-item"><div class="faq-q">How do I scan a QR code?</div><div class="faq-a">Open your phone camera app and point it at the QR code. On iPhone, tap the notification. On Android, most camera apps detect QR codes automatically. Or use QRMaker's built-in <a href="scanner.html" style="color:var(--blue)">QR Scanner</a> to scan from camera or image upload.</div></div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('index.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+document.getElementById('design-panel').innerHTML = QBUtils.buildDesignPanelHTML();
+document.getElementById('download-panel').innerHTML = QBUtils.buildDownloadPanelHTML();
+
+const state = QBUtils.createQRState();
+const canvas = QBUtils.el('qr-canvas');
+const placeholder = QBUtils.el('placeholder');
+
+const FORMS = {
+  url: `<div class="form-card"><div class="form-title">🔗 Website URL</div>
+    <div class="form-group"><label class="form-label">Website URL *</label>
+    <input class="form-input large" id="f-url" type="url" placeholder="https://yourwebsite.com" autocomplete="off">
+    <div class="form-hint" id="f-url-hint">Enter any website URL to generate QR code</div></div></div>`,
+
+  whatsapp: `<div class="form-card"><div class="form-title">💬 WhatsApp QR</div>
+    <div class="form-group"><label class="form-label">Phone Number *</label>
+    <div class="input-wrap"><span class="input-prefix">🇮🇳 +91</span>
+    <input class="form-input" id="f-wa-phone" type="tel" placeholder="9876543210" maxlength="10"></div></div>
+    <div class="form-group"><label class="form-label">Pre-filled Message (optional)</label>
+    <textarea class="form-input" id="f-wa-msg" placeholder="Hi, I'd like to know more about..."></textarea></div></div>`,
+
+  upi: `<div class="form-card"><div class="form-title">💳 UPI Payment</div>
+    <div class="india-card" style="margin-bottom:1rem">🇮🇳 Works with GPay, PhonePe, Paytm, BHIM, and all UPI apps</div>
+    <div class="form-group"><label class="form-label">UPI ID / VPA *</label>
+    <input class="form-input" id="f-upi-id" type="text" placeholder="yourname@okicici" autocomplete="off">
+    <div class="form-hint">Your UPI ID from any UPI app or bank</div></div>
+    <div class="form-group"><label class="form-label">Payee Name *</label>
+    <input class="form-input" id="f-upi-name" type="text" placeholder="Your Name or Business Name"></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Amount (₹)</label>
+      <input class="form-input" id="f-upi-amount" type="number" placeholder="Leave empty for any amount"></div>
+      <div class="form-group"><label class="form-label">Note</label>
+      <input class="form-input" id="f-upi-note" type="text" placeholder="e.g. Payment for order"></div>
+    </div></div>`,
+
+  wifi: `<div class="form-card"><div class="form-title">📶 WiFi Password</div>
+    <div class="form-group"><label class="form-label">Network Name (SSID) *</label>
+    <input class="form-input" id="f-wifi-ssid" type="text" placeholder="MyWiFiNetwork"></div>
+    <div class="form-group"><label class="form-label">Password</label>
+    <input class="form-input" id="f-wifi-pass" type="text" placeholder="WiFi password"></div>
+    <div class="form-group"><label class="form-label">Security</label>
+    <select class="form-input" id="f-wifi-sec"><option value="WPA">WPA/WPA2 (most common)</option><option value="WEP">WEP</option><option value="nopass">Open (no password)</option></select></div></div>`,
+
+  vcard: `<div class="form-card"><div class="form-title">👤 Business Card</div>
+    <div class="form-row"><div class="form-group"><label class="form-label">First Name *</label>
+    <input class="form-input" id="f-vc-fn" type="text" placeholder="Raj"></div>
+    <div class="form-group"><label class="form-label">Last Name *</label>
+    <input class="form-input" id="f-vc-ln" type="text" placeholder="Sharma"></div></div>
+    <div class="form-group"><label class="form-label">Job Title</label>
+    <input class="form-input" id="f-vc-title" type="text" placeholder="Software Engineer"></div>
+    <div class="form-group"><label class="form-label">Company</label>
+    <input class="form-input" id="f-vc-org" type="text" placeholder="Company Name"></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">Phone</label>
+    <input class="form-input" id="f-vc-phone" type="tel" placeholder="+91 9876543210"></div>
+    <div class="form-group"><label class="form-label">Email</label>
+    <input class="form-input" id="f-vc-email" type="email" placeholder="raj@example.com"></div></div>
+    <div class="form-group"><label class="form-label">Website</label>
+    <input class="form-input" id="f-vc-web" type="url" placeholder="https://yoursite.com"></div></div>`,
+
+  email: `<div class="form-card"><div class="form-title">✉️ Email QR</div>
+    <div class="form-group"><label class="form-label">Email Address *</label>
+    <input class="form-input" id="f-em-email" type="email" placeholder="contact@example.com"></div>
+    <div class="form-group"><label class="form-label">Subject (optional)</label>
+    <input class="form-input" id="f-em-subj" type="text" placeholder="Inquiry about..."></div>
+    <div class="form-group"><label class="form-label">Message Body (optional)</label>
+    <textarea class="form-input" id="f-em-body" placeholder="Hello..."></textarea></div></div>`,
+
+  sms: `<div class="form-card"><div class="form-title">💬 SMS QR</div>
+    <div class="form-group"><label class="form-label">Phone Number *</label>
+    <div class="input-wrap"><span class="input-prefix">🇮🇳 +91</span>
+    <input class="form-input" id="f-sms-phone" type="tel" placeholder="9876543210"></div></div>
+    <div class="form-group"><label class="form-label">Message (optional)</label>
+    <textarea class="form-input" id="f-sms-msg" placeholder="Pre-filled SMS text..."></textarea></div></div>`,
+
+  text: `<div class="form-card"><div class="form-title">📝 Plain Text</div>
+    <div class="form-group"><label class="form-label">Text Content *</label>
+    <textarea class="form-input" id="f-text" style="min-height:120px" placeholder="Enter any text — works offline when scanned..."></textarea></div></div>`,
+};
+
+function getContent(type) {
+  switch (type) {
+    case 'url': return QREngine.buildContent('url', { url: QBUtils.el('f-url')?.value });
+    case 'whatsapp': return QREngine.buildContent('whatsapp', { phone: QBUtils.el('f-wa-phone')?.value, message: QBUtils.el('f-wa-msg')?.value });
+    case 'upi': return QREngine.buildContent('upi', { upiId: QBUtils.el('f-upi-id')?.value, name: QBUtils.el('f-upi-name')?.value, amount: QBUtils.el('f-upi-amount')?.value, note: QBUtils.el('f-upi-note')?.value });
+    case 'wifi': return QREngine.buildContent('wifi', { ssid: QBUtils.el('f-wifi-ssid')?.value, password: QBUtils.el('f-wifi-pass')?.value, security: QBUtils.el('f-wifi-sec')?.value });
+    case 'vcard': return QREngine.buildContent('vcard', { firstName: QBUtils.el('f-vc-fn')?.value, lastName: QBUtils.el('f-vc-ln')?.value, title: QBUtils.el('f-vc-title')?.value, org: QBUtils.el('f-vc-org')?.value, phone: QBUtils.el('f-vc-phone')?.value, email: QBUtils.el('f-vc-email')?.value, website: QBUtils.el('f-vc-web')?.value });
+    case 'email': return QREngine.buildContent('email', { email: QBUtils.el('f-em-email')?.value, subject: QBUtils.el('f-em-subj')?.value, body: QBUtils.el('f-em-body')?.value });
+    case 'sms': return QREngine.buildContent('sms', { phone: QBUtils.el('f-sms-phone')?.value, message: QBUtils.el('f-sms-msg')?.value });
+    case 'text': return QBUtils.el('f-text')?.value || '';
+    default: return '';
+  }
+}
+
+let currentType = 'url';
+
+function switchType(type) {
+  currentType = type;
+  document.querySelectorAll('.type-tab').forEach(t => t.classList.toggle('active', t.dataset.type === type));
+  QBUtils.el('form-area').innerHTML = FORMS[type] || FORMS.url;
+
+  // Wire live update
+  QBUtils.el('form-area').querySelectorAll('input, textarea, select').forEach(input => {
+    input.addEventListener('input', debouncedGenerate);
+    input.addEventListener('change', debouncedGenerate);
+  });
+}
+
+function generateQR() {
+  const content = getContent(currentType);
+  if (!content || content.length < 2) {
+    placeholder.style.display = 'flex';
+    canvas.style.display = 'none';
+    QBUtils.el('size-label').textContent = '';
+    state.matrix = null;
+    return;
+  }
+  try {
+    state.matrix = QREngine.generate(content, { errorLevel: state.options.errorLevel });
+    placeholder.style.display = 'none';
+    canvas.style.display = 'block';
+    const wrap = QBUtils.el('canvas-wrap');
+    const size = Math.min(wrap.offsetWidth - 32, 300);
+    QRDesign.render(state.matrix, canvas, Object.assign({ size: Math.max(size, 200) }, state.options));
+    QBUtils.el('size-label').textContent = state.matrix.length + '×' + state.matrix.length + ' modules';
+  } catch (e) {
+    console.error('QR Error:', e);
+  }
+}
+
+const debouncedGenerate = QBUtils.debounce(generateQR, 400);
+
+document.querySelectorAll('.type-tab').forEach(tab => {
+  tab.addEventListener('click', () => switchType(tab.dataset.type));
+});
+
+QBUtils.wireDesignPanel(state, generateQR);
+QBUtils.wireDownloads(state, canvas, () => 'QRMaker-' + currentType);
+
+switchType('url');
+QBUtils.initFAQ();
+</script>
+</body>
+</html>

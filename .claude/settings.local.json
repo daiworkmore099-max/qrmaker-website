@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"C:\\\\Users\\\\DINESH\\\\Desktop\\\\qrbit\\\\css\" \"C:\\\\Users\\\\DINESH\\\\Desktop\\\\qrbit\\\\js\" \"C:\\\\Users\\\\DINESH\\\\Desktop\\\\qrbit\\\\tests\" && echo \"Directories created\")",
+      "PowerShell(Get-ChildItem -Recurse \"C:\\\\Users\\\\DINESH\\\\Desktop\\\\qrbit\" | Where-Object { !$_.PSIsContainer } | ForEach-Object { \"✅ \" + $_.FullName.Replace\\(\"C:\\\\Users\\\\DINESH\\\\Desktop\\\\qrbit\\\\\",\"\"\\) + \" \\(\" + [math]::Round\\($_.Length/1KB,1\\) + \" KB\\)\" })"
+    ]
+  }
+}

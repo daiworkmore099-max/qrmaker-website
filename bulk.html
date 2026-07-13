@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulk QR Code Generator — Multiple QR Codes at Once | QRMaker</title>
+<meta name="description" content="Free bulk QR code generator. Create multiple QR codes at once from CSV or text list. Download all as ZIP or individually. No signup, no watermark.">
+<link rel="canonical" href="https://QRMaker.in/bulk.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://QRMaker.in/bulk.html">
+<meta property="og:title" content="Bulk QR Code Generator — Multiple QR Codes at Once | QRMaker">
+<meta property="og:description" content="Free bulk QR code generator. Create multiple QR codes at once from CSV or text list. Download all as ZIP or individually. No signup, no watermark.">
+<meta property="og:image" content="https://QRMaker.in/og-image.png">
+<meta property="og:site_name" content="QRMaker">
+<meta property="og:locale" content="en_IN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bulk QR Code Generator — Multiple QR Codes at Once | QRMaker">
+<meta name="twitter:description" content="Free bulk QR code generator. Create multiple QR codes at once from CSV or text list. Download all as ZIP or individually. No signup, no watermark.">
+<meta name="twitter:image" content="https://QRMaker.in/og-image.png">
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Bulk QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page">
+  <div class="trust-badge">🔒 No signup. No watermark. 100% Free</div>
+  <h1 class="page-title">Bulk QR Code Generator</h1>
+  <p class="page-sub">Generate multiple QR codes at once from a list or CSV file</p>
+
+  <div class="form-card">
+    <div class="form-title">⚙️ Settings</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">QR Type</label>
+        <select class="form-input" id="bulk-type">
+          <option value="url">URL / Website</option>
+          <option value="upi">UPI Payment</option>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="text">Plain Text</option>
+          <option value="wifi">WiFi</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">QR Size (px)</label>
+        <select class="form-input" id="bulk-size">
+          <option value="256">256px</option>
+          <option value="512" selected>512px</option>
+          <option value="1024">1024px</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-container">
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tab-text">📝 Text List</button>
+      <button class="tab-btn" id="tab-csv">📊 CSV Upload</button>
+    </div>
+
+    <div id="panel-text" class="tab-panel active">
+      <div class="form-card">
+        <div class="form-title" id="bulk-hint-title">One URL per line (max 50)</div>
+        <textarea class="form-input" id="bulk-text-input" style="min-height:180px;font-family:monospace;font-size:13px"
+          placeholder="https://example.com&#10;https://yourshop.com&#10;https://instagram.com/username&#10;..."></textarea>
+        <div class="form-hint"><span id="bulk-line-count">0</span> items entered</div>
+      </div>
+    </div>
+
+    <div id="panel-csv" class="tab-panel">
+      <div class="form-card">
+        <div class="logo-upload-zone" id="csv-drop-zone" style="padding:1.5rem">
+          <div style="font-size:32px;margin-bottom:8px">📊</div>
+          <div style="font-weight:600;margin-bottom:4px">Drop CSV file or click to upload</div>
+          <div style="font-size:12px;color:var(--text-3)">First column = label, second column = URL/data</div>
+        </div>
+        <input type="file" id="csv-upload" accept=".csv,text/csv" style="display:none">
+        <div id="csv-preview" style="margin-top:8px;display:none">
+          <div style="font-size:12px;font-weight:600;margin-bottom:6px" id="csv-info"></div>
+          <div style="font-family:monospace;font-size:11px;color:var(--text-2);max-height:120px;overflow:auto;background:var(--surface-2);padding:8px;border-radius:6px" id="csv-preview-text"></div>
+        </div>
+      </div>
+
+      <div class="form-card" style="background:var(--surface-2)">
+        <div class="form-title">CSV Format Examples</div>
+        <div style="font-family:monospace;font-size:12px;color:var(--text-2);margin-bottom:8px">
+          <strong>URL:</strong><br>
+          name,url<br>
+          Homepage,https://example.com<br>
+          Products,https://example.com/products
+        </div>
+        <div style="font-family:monospace;font-size:12px;color:var(--text-2)">
+          <strong>UPI:</strong><br>
+          name,upi_id,payee_name,amount<br>
+          Shop1,shop1@okicici,Shop One,<br>
+          Shop2,shop2@ybl,Shop Two,500
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Design options (simplified) -->
+  <div class="form-card">
+    <div class="form-title">🎨 Design</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Foreground Color</label>
+        <div class="color-row">
+          <label class="color-swatch"><input type="color" id="bulk-fg" value="#000000"></label>
+          <input type="text" class="color-hex-input" id="bulk-fg-hex" value="#000000" maxlength="7">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Dot Style</label>
+        <select class="form-input" id="bulk-dot-style">
+          <option value="square">Square</option>
+          <option value="rounded">Rounded</option>
+          <option value="dots">Dots</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Error Correction</label>
+      <select class="form-input" id="bulk-ec">
+        <option value="L">L — Low (7%)</option>
+        <option value="M" selected>M — Medium (15%)</option>
+        <option value="Q">Q — High (25%)</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="generate-btn" id="bulk-generate-btn">⚡ Generate All QR Codes</button>
+
+  <!-- Progress -->
+  <div id="bulk-progress" style="display:none;margin-top:1rem">
+    <div style="font-size:13px;font-weight:500;margin-bottom:6px" id="bulk-progress-text">Generating...</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="bulk-progress-bar" style="width:0%"></div></div>
+  </div>
+
+  <!-- Results -->
+  <div id="bulk-results" style="display:none;margin-top:1.5rem">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px">
+      <div style="font-size:15px;font-weight:700" id="bulk-count-label"></div>
+      <div style="display:flex;gap:8px">
+        <button class="dl-btn-secondary" id="download-all-btn" style="width:auto;padding:8px 16px">⬇ Download All (ZIP)</button>
+        <button class="dl-btn-secondary" id="download-all-seq-btn" style="width:auto;padding:8px 16px">⬇ Download One by One</button>
+      </div>
+    </div>
+    <div class="bulk-grid" id="bulk-grid"></div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+
+<script src="js/qrengine.js"></script>
+<script src="js/design.js"></script>
+<script src="js/utils.js"></script>
+<!-- JSZip for ZIP download -->
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
+document.getElementById('nav-placeholder').innerHTML = QBUtils.buildNavHTML('bulk.html');
+document.getElementById('footer-placeholder').innerHTML = QBUtils.buildFooterHTML();
+
+// Tab switching
+document.getElementById('tab-text').addEventListener('click', () => {
+  document.getElementById('tab-text').classList.add('active'); document.getElementById('tab-csv').classList.remove('active');
+  document.getElementById('panel-text').classList.add('active'); document.getElementById('panel-csv').classList.remove('active');
+});
+document.getElementById('tab-csv').addEventListener('click', () => {
+  document.getElementById('tab-csv').classList.add('active'); document.getElementById('tab-text').classList.remove('active');
+  document.getElementById('panel-csv').classList.add('active'); document.getElementById('panel-text').classList.remove('active');
+});
+
+// Line count
+const textInput = document.getElementById('bulk-text-input');
+textInput.addEventListener('input', () => {
+  const lines = textInput.value.split('\n').filter(l => l.trim()).length;
+  document.getElementById('bulk-line-count').textContent = lines;
+});
+
+// CSV upload
+const csvDrop = document.getElementById('csv-drop-zone');
+const csvUpload = document.getElementById('csv-upload');
+let csvData = [];
+
+csvDrop.addEventListener('click', () => csvUpload.click());
+csvDrop.addEventListener('dragover', e => { e.preventDefault(); csvDrop.style.borderColor = 'var(--blue)'; });
+csvDrop.addEventListener('dragleave', () => { csvDrop.style.borderColor = ''; });
+csvDrop.addEventListener('drop', e => { e.preventDefault(); csvDrop.style.borderColor = ''; const f = e.dataTransfer.files[0]; if (f) readCSV(f); });
+csvUpload.addEventListener('change', () => { if (csvUpload.files[0]) readCSV(csvUpload.files[0]); });
+
+function readCSV(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    csvData = QBUtils.parseCSV(e.target.result);
+    document.getElementById('csv-preview').style.display = 'block';
+    document.getElementById('csv-info').textContent = csvData.length + ' rows loaded';
+    document.getElementById('csv-preview-text').textContent = csvData.slice(0, 5).map(r => r.join(',')).join('\n') + (csvData.length > 5 ? '\n...' : '');
+    QBUtils.showToast(csvData.length + ' rows loaded', 'success');
+  };
+  reader.readAsText(file);
+}
+
+// Color sync
+document.getElementById('bulk-fg').addEventListener('input', () => {
+  document.getElementById('bulk-fg-hex').value = document.getElementById('bulk-fg').value;
+});
+document.getElementById('bulk-fg-hex').addEventListener('input', () => {
+  const v = document.getElementById('bulk-fg-hex').value;
+  if (/^#[0-9a-f]{6}$/i.test(v)) document.getElementById('bulk-fg').value = v;
+});
+
+// ── Generate ────────────────────────────────────────────────────────────────
+let generatedCanvases = [];
+
+function getItems() {
+  const type = document.getElementById('bulk-type').value;
+  const activeTab = document.getElementById('tab-text').classList.contains('active') ? 'text' : 'csv';
+
+  if (activeTab === 'text') {
+    const lines = textInput.value.split('\n').map(l => l.trim()).filter(Boolean).slice(0, 50);
+    return lines.map(line => ({ label: line.substring(0, 40), content: buildBulkContent(type, line) }));
+  } else {
+    // CSV — skip header row if first col is 'name'
+    let rows = csvData;
+    if (rows.length > 0 && rows[0][0].toLowerCase() === 'name') rows = rows.slice(1);
+    return rows.slice(0, 50).map(row => ({
+      label: row[0] || row[1] || 'QR',
+      content: buildBulkContentCSV(type, row)
+    }));
+  }
+}
+
+function buildBulkContent(type, value) {
+  switch (type) {
+    case 'url': return QREngine.buildContent('url', { url: value });
+    case 'text': return value;
+    case 'whatsapp': return QREngine.buildContent('whatsapp', { phone: value.replace(/\D/g,''), countryCode: '91' });
+    default: return value;
+  }
+}
+
+function buildBulkContentCSV(type, row) {
+  switch (type) {
+    case 'url': return QREngine.buildContent('url', { url: row[1] || row[0] });
+    case 'upi': return QREngine.buildContent('upi', { upiId: row[1], name: row[2], amount: row[3], note: row[4] });
+    case 'whatsapp': return QREngine.buildContent('whatsapp', { phone: (row[1]||'').replace(/\D/g,''), countryCode: '91', message: row[2] });
+    default: return row[1] || row[0];
+  }
+}
+
+document.getElementById('bulk-generate-btn').addEventListener('click', async () => {
+  const items = getItems();
+  if (!items.length) { QBUtils.showToast('Enter some data first', 'error'); return; }
+
+  generatedCanvases = [];
+  document.getElementById('bulk-progress').style.display = 'block';
+  document.getElementById('bulk-results').style.display = 'none';
+  document.getElementById('bulk-grid').innerHTML = '';
+
+  const size = parseInt(document.getElementById('bulk-size').value);
+  const fgColor = document.getElementById('bulk-fg').value;
+  const dotStyle = document.getElementById('bulk-dot-style').value;
+  const errorLevel = document.getElementById('bulk-ec').value;
+
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    document.getElementById('bulk-progress-text').textContent = `Generating ${i + 1} of ${items.length}: ${item.label}`;
+    document.getElementById('bulk-progress-bar').style.width = ((i + 1) / items.length * 100) + '%';
+
+    try {
+      const matrix = QREngine.generate(item.content, { errorLevel });
+      const canvas = document.createElement('canvas');
+      QRDesign.render(matrix, canvas, { size, fgColor, dotStyle });
+      generatedCanvases.push({ canvas, label: item.label, content: item.content });
+
+      // Show in grid (small preview)
+      const previewCanvas = document.createElement('canvas');
+      QRDesign.render(matrix, previewCanvas, { size: 140, fgColor, dotStyle });
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'bulk-qr-item';
+      itemDiv.innerHTML = `<div class="bulk-qr-label">${item.label.replace(/</g,'&lt;')}</div>`;
+      itemDiv.insertBefore(previewCanvas, itemDiv.firstChild);
+      const dlBtn = document.createElement('button');
+      dlBtn.className = 'dl-btn-secondary';
+      dlBtn.style.cssText = 'width:100%;margin-top:6px;padding:5px;font-size:11px';
+      dlBtn.textContent = '⬇ PNG';
+      const idx = i;
+      dlBtn.addEventListener('click', () => QRDesign.downloadPNG(generatedCanvases[idx].canvas, 'QRMaker-' + generatedCanvases[idx].label.replace(/[^a-z0-9]/gi,'-'), size));
+      itemDiv.appendChild(dlBtn);
+      document.getElementById('bulk-grid').appendChild(itemDiv);
+    } catch(e) { console.error('Failed:', item.label, e); }
+
+    // Yield to browser every 5 items
+    if (i % 5 === 4) await new Promise(r => setTimeout(r, 0));
+  }
+
+  document.getElementById('bulk-progress').style.display = 'none';
+  document.getElementById('bulk-results').style.display = 'block';
+  document.getElementById('bulk-count-label').textContent = `✅ ${generatedCanvases.length} QR codes generated`;
+  QBUtils.showToast(generatedCanvases.length + ' QR codes generated!', 'success');
+});
+
+// ── Download All ─────────────────────────────────────────────────────────────
+document.getElementById('download-all-btn').addEventListener('click', async () => {
+  if (!generatedCanvases.length) return;
+  if (typeof JSZip === 'undefined') {
+    QBUtils.showToast('ZIP library not loaded — using one-by-one download', 'info');
+    downloadSequential();
+    return;
+  }
+  const zip = new JSZip();
+  const size = parseInt(document.getElementById('bulk-size').value);
+  QBUtils.showToast('Creating ZIP...', 'info');
+  for (let i = 0; i < generatedCanvases.length; i++) {
+    const { canvas, label } = generatedCanvases[i];
+    const off = document.createElement('canvas');
+    off.width = off.height = size;
+    off.getContext('2d').drawImage(canvas, 0, 0, size, size);
+    const dataUrl = off.toDataURL('image/png');
+    const base64 = dataUrl.split(',')[1];
+    zip.file(`QRMaker-${i+1}-${label.replace(/[^a-z0-9]/gi,'-').substring(0,20)}.png`, base64, { base64: true });
+  }
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'QRMaker-bulk-qrcodes.zip'; a.click();
+  URL.revokeObjectURL(url);
+  QBUtils.showToast('ZIP downloaded!', 'success');
+});
+
+document.getElementById('download-all-seq-btn').addEventListener('click', downloadSequential);
+
+async function downloadSequential() {
+  const size = parseInt(document.getElementById('bulk-size').value);
+  for (let i = 0; i < generatedCanvases.length; i++) {
+    const { canvas, label } = generatedCanvases[i];
+    QRDesign.downloadPNG(canvas, `QRMaker-${i+1}-${label.replace(/[^a-z0-9]/gi,'-').substring(0,20)}`, size);
+    await new Promise(r => setTimeout(r, 300));
+  }
+}
+</script>
+</body>
+</html>
