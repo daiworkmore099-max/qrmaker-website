@@ -1,9 +1,0 @@
-﻿{
-  "name": "QRMaker",
-  "version": "1.0.0",
-  "description": "Free QR Code Generator — No signup, no watermark, no limits",
-  "scripts": {
-    "start": "npx live-server --port=3000 --open=index.html",
-    "test": "npx live-server --port=3001 --open=tests/test-runner.html"
-  }
-}
