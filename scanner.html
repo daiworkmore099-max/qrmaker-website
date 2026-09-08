@@ -206,12 +206,9 @@
 <script src="js/design.js"></script>
 <script src="js/utils.js"></script>
 
-<!-- Inline jsQR — pure JS QR decoder (~15KB) -->
-<script>
-/* jsQR v1.4.0 — MIT License — https://github.com/cozmo/jsQR */
-/* Minified inline for zero-CDN self-contained operation */
-</script>
-<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" onerror="loadJsQRFallback()"></script>
+<!-- jsQR v1.4.0 — MIT License — https://github.com/cozmo/jsQR -->
+<!-- Vendored locally: no CDN dependency, no supply-chain risk -->
+<script src="js/vendor/jsQR.js" onerror="loadJsQRFallback()"></script>
 <script>
 // Fallback: simple QR decoder stub if CDN fails
 function loadJsQRFallback() {
@@ -362,36 +359,88 @@ function parseWifi(text) {
   return { ssid, pass, type };
 }
 
-function buildActions(type, text) {
-  const btns = [];
+// ── Security helpers ────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s).replace(/[&<>"'`]/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'
+  })[c]);
+}
+function safeUrl(text, allowed) {
+  try {
+    const u = new URL(text);
+    return allowed.includes(u.protocol) ? text : null;
+  } catch { return null; }
+}
+
+// Builds action buttons using DOM APIs (no string interpolation into HTML)
+// so a malicious QR code payload cannot break out of attributes or inject tags.
+function buildActionsInto(container, type, text) {
+  container.textContent = '';
+  const add = (label, cls, onClick) => {
+    const b = document.createElement('button');
+    b.className = 'scanner-btn ' + cls;
+    b.textContent = label;
+    if (onClick) b.addEventListener('click', onClick);
+    container.appendChild(b);
+    return b;
+  };
+
   switch (type) {
     case 'url':
-    case 'whatsapp':
-      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="window.open(${JSON.stringify(text)},'_blank')">🌐 Open Link</button>`);
+    case 'whatsapp': {
+      const safe = safeUrl(text, ['http:', 'https:']);
+      if (safe) add('🌐 Open Link', 'scanner-btn-primary',
+        () => window.open(safe, '_blank', 'noopener,noreferrer'));
       break;
-    case 'upi':
-      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="window.location.href=${JSON.stringify(text)}">💳 Open UPI App</button>`);
+    }
+    case 'upi': {
+      const safe = safeUrl(text, ['upi:']);
+      if (safe) add('💳 Open UPI App', 'scanner-btn-primary',
+        () => { window.location.href = safe; });
       break;
+    }
     case 'wifi': {
       const w = parseWifi(text);
-      btns.push(`<div style="font-size:13px;background:var(--surface-2);padding:10px;border-radius:8px;margin-bottom:8px"><strong>Network:</strong> ${w.ssid}<br><strong>Password:</strong> ${w.pass || '(none)'}<br><strong>Security:</strong> ${w.type}</div>`);
+      const info = document.createElement('div');
+      info.style.cssText = 'font-size:13px;background:var(--surface-2);padding:10px;border-radius:8px;margin-bottom:8px';
+      const rows = [
+        ['Network:',  w.ssid],
+        ['Password:', w.pass || '(none)'],
+        ['Security:', w.type],
+      ];
+      rows.forEach(([k, v], i) => {
+        const strong = document.createElement('strong');
+        strong.textContent = k + ' ';
+        info.appendChild(strong);
+        info.appendChild(document.createTextNode(v));
+        if (i < rows.length - 1) info.appendChild(document.createElement('br'));
+      });
+      container.appendChild(info);
       break;
     }
     case 'vcard':
-      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="downloadVCard(${JSON.stringify(text)})">👤 Save Contact</button>`);
+      add('👤 Save Contact', 'scanner-btn-primary', () => downloadVCard(text));
       break;
-    case 'email':
-      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="window.location.href=${JSON.stringify(text)}">✉️ Open Email</button>`);
+    case 'email': {
+      const safe = safeUrl(text, ['mailto:']);
+      if (safe) add('✉️ Open Email', 'scanner-btn-primary',
+        () => { window.location.href = safe; });
       break;
-    case 'phone':
-      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="window.location.href=${JSON.stringify(text)}">📞 Call</button>`);
+    }
+    case 'phone': {
+      const safe = safeUrl(text, ['tel:']);
+      if (safe) add('📞 Call', 'scanner-btn-primary',
+        () => { window.location.href = safe; });
       break;
+    }
     case 'location':
-      btns.push(`<button class="scanner-btn scanner-btn-primary" onclick="window.open('https://maps.google.com/?q='+encodeURIComponent(${JSON.stringify(text.replace('geo:',''))}),'_blank')">📍 Open Maps</button>`);
+      add('📍 Open Maps', 'scanner-btn-primary',
+        () => window.open('https://maps.google.com/?q=' +
+          encodeURIComponent(text.replace(/^geo:/i, '')),
+          '_blank', 'noopener,noreferrer'));
       break;
   }
-  btns.push(`<button class="scanner-btn scanner-btn-secondary" onclick="QBUtils.copyToClipboard(${JSON.stringify(text)})">📋 Copy</button>`);
-  return btns.join('');
+  add('📋 Copy', 'scanner-btn-secondary', () => QBUtils.copyToClipboard(text));
 }
 
 function downloadVCard(vcardText) {
@@ -414,7 +463,7 @@ function showResult(text) {
   badge.style.color = info.textColor;
 
   document.getElementById('result-content').textContent = text;
-  document.getElementById('result-actions').innerHTML = buildActions(type, text);
+  buildActionsInto(document.getElementById('result-actions'), type, text);
 
   // Save to history
   saveHistory({ text, type, time: new Date().toISOString() });
@@ -424,8 +473,13 @@ function showResult(text) {
 // ── History ─────────────────────────────────────────────────────────────────
 function saveHistory(item) {
   try {
+    const safe = {
+      text: String(item.text).slice(0, 2048),   // hard per-entry cap
+      type: String(item.type).slice(0, 32),
+      time: String(item.time).slice(0, 64),
+    };
     const h = JSON.parse(localStorage.getItem('QRMaker-scan-history') || '[]');
-    h.unshift(item);
+    h.unshift(safe);
     localStorage.setItem('QRMaker-scan-history', JSON.stringify(h.slice(0, 10)));
   } catch(e) {}
 }
@@ -433,22 +487,45 @@ function saveHistory(item) {
 function loadHistory() {
   try {
     const h = JSON.parse(localStorage.getItem('QRMaker-scan-history') || '[]');
-    if (h.length === 0) return;
+    if (!Array.isArray(h) || h.length === 0) return;
     const section = document.getElementById('history-section');
     section.style.display = 'block';
     const list = document.getElementById('history-list');
-    list.innerHTML = h.map(item => {
+    list.textContent = '';   // clear safely
+    h.forEach(item => {
+      if (!item || typeof item.text !== 'string') return;
       const info = TYPE_INFO[item.type] || TYPE_INFO.text;
-      const time = new Date(item.time).toLocaleString('en-IN', { dateStyle: 'short', timeStyle: 'short' });
-      const short = item.text.length > 60 ? item.text.substring(0, 60) + '…' : item.text;
-      return `<div class="history-item" onclick="showResult(${JSON.stringify(item.text)})" style="cursor:pointer">
-        <div class="history-icon">${info.label.split(' ')[0]}</div>
-        <div class="history-content">
-          <div class="history-text">${short.replace(/</g,'&lt;')}</div>
-          <div class="history-meta">${info.label} · ${time}</div>
-        </div>
-      </div>`;
-    }).join('');
+      const time = new Date(item.time).toLocaleString('en-IN',
+        { dateStyle: 'short', timeStyle: 'short' });
+      const short = item.text.length > 60
+        ? item.text.substring(0, 60) + '…' : item.text;
+
+      const row = document.createElement('div');
+      row.className = 'history-item';
+      row.style.cursor = 'pointer';
+      row.addEventListener('click', () => showResult(item.text));
+
+      const iconDiv = document.createElement('div');
+      iconDiv.className = 'history-icon';
+      iconDiv.textContent = info.label.split(' ')[0];
+
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'history-content';
+
+      const textDiv = document.createElement('div');
+      textDiv.className = 'history-text';
+      textDiv.textContent = short;
+
+      const metaDiv = document.createElement('div');
+      metaDiv.className = 'history-meta';
+      metaDiv.textContent = info.label + ' · ' + time;
+
+      contentDiv.appendChild(textDiv);
+      contentDiv.appendChild(metaDiv);
+      row.appendChild(iconDiv);
+      row.appendChild(contentDiv);
+      list.appendChild(row);
+    });
   } catch(e) {}
 }
 

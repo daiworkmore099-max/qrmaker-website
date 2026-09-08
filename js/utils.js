@@ -299,9 +299,24 @@ const QBUtils = (() => {
   }
 
   function loadLogoFile(file, state, logoZone, logoPreviewWrap, logoPreview, onUpdate) {
+    // Validate MIME type — only real image types allowed
+    const ALLOWED = ['image/png','image/jpeg','image/jpg','image/webp','image/gif','image/svg+xml'];
+    if (!file || !ALLOWED.includes((file.type || '').toLowerCase())) {
+      showToast('Only PNG, JPG, WebP, GIF or SVG allowed', 'error');
+      return;
+    }
+    // Cap file size — prevents memory-crash / DoS via huge upload
+    const MAX_BYTES = 2 * 1024 * 1024; // 2 MB
+    if (file.size > MAX_BYTES) {
+      showToast('Logo must be smaller than 2 MB', 'error');
+      return;
+    }
+
     const reader = new FileReader();
+    reader.onerror = () => showToast('Could not read logo file', 'error');
     reader.onload = e => {
       const img = new Image();
+      img.onerror = () => showToast('Invalid image file', 'error');
       img.onload = () => {
         state.options.logoImage = img;
         if (logoZone) logoZone.style.display = 'none';

@@ -294,9 +294,15 @@ const QRDesign = (() => {
             .then(resolve).catch(reject);
         }, 'image/png');
       } else {
-        // Fallback: open in new tab
-        const win = window.open();
-        win.document.write('<img src="' + canvas.toDataURL() + '">');
+        // Fallback: open in new tab using DOM (no document.write)
+        const win = window.open('', '_blank', 'noopener,noreferrer');
+        if (win && win.document) {
+          const img = win.document.createElement('img');
+          img.src = canvas.toDataURL();
+          img.alt = 'QR code';
+          img.style.maxWidth = '100%';
+          win.document.body.appendChild(img);
+        }
         resolve();
       }
     });
