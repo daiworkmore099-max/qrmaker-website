@@ -1,17 +1,22 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
 
-# AI crawlers
+# AI search crawlers — allow full indexing (helps discovery via ChatGPT,
+# Claude, Perplexity, Google AI Overviews). This site is a free public tool
+# with no monetized content, so AI citation is pure upside.
 User-agent: GPTBot
-Disallow: /
+Allow: /
 
 User-agent: ClaudeBot
-Disallow: /
+Allow: /
 
 User-agent: Google-Extended
-Disallow: /
+Allow: /
 
 User-agent: PerplexityBot
-Disallow: /
+Allow: /
 
-Sitemap: https://QRMaker.in/sitemap.xml
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://www.qrmaker.in/sitemap.xml
