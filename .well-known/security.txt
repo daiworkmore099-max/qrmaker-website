@@ -1,0 +1,4 @@
+Contact: mailto:daiworkmore099@gmail.com
+Expires: 2027-09-12T00:00:00.000Z
+Preferred-Languages: en, hi
+Canonical: https://qrmaker.in/.well-known/security.txt
