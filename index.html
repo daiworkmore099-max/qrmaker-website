@@ -22,6 +22,7 @@
 <title>Free QR Code Generator — QRMaker | No Signup, No Watermark</title>
 <meta name="description" content="Free QR code generator — URL, WhatsApp, UPI payment, WiFi, vCard and more. No signup, no watermark. India's best free QR generator with logo support and SVG download.">
 <link rel="canonical" href="https://www.qrmaker.in/">
+<link rel="alternate" hreflang="en-IN" href="https://www.qrmaker.in/"><link rel="alternate" hreflang="en" href="https://www.qrmaker.in/"><link rel="alternate" hreflang="x-default" href="https://www.qrmaker.in/">
 <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -36,8 +37,8 @@
 <meta name="twitter:title" content="Free QR Code Generator — QRMaker | No Signup, No Watermark">
 <meta name="twitter:description" content="Free QR code generator — URL, WhatsApp, UPI payment, WiFi, vCard and more. No signup, no watermark. India's best free QR generator with logo support and SVG download.">
 <meta name="twitter:image" content="https://www.qrmaker.in/og-image.png">
-<!-- JSON-LD -->
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"QRMaker","url":"https://www.qrmaker.in","potentialAction":{"@type":"SearchAction","target":"https://www.qrmaker.in/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<!-- JSON-LD: WebSite + Organization -->
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.qrmaker.in/#website","url":"https://www.qrmaker.in/","name":"QRMaker","inLanguage":"en-IN","description":"Free QR code generator and scanner for India — UPI, WhatsApp, WiFi, vCard and more.","publisher":{"@id":"https://www.qrmaker.in/#organization"}},{"@type":"Organization","@id":"https://www.qrmaker.in/#organization","name":"QRMaker","url":"https://www.qrmaker.in/","logo":{"@type":"ImageObject","url":"https://www.qrmaker.in/favicon.png","width":48,"height":48},"description":"Free, no-signup QR code generator focused on the Indian market — UPI, WhatsApp, WiFi and business QR codes.","areaServed":{"@type":"Country","name":"India"}},{"@type":"WebPage","@id":"https://www.qrmaker.in/#webpage","url":"https://www.qrmaker.in/","name":"Free QR Code Generator — QRMaker","isPartOf":{"@id":"https://www.qrmaker.in/#website"},"about":{"@id":"https://www.qrmaker.in/#organization"},"inLanguage":"en-IN"},{"@type":"SoftwareApplication","name":"QRMaker QR Code Generator","operatingSystem":"Web","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"featureList":["UPI QR Code","WhatsApp QR Code","WiFi QR Code","vCard QR Code","URL QR Code","Bulk QR Code Generator","QR Code Scanner"]}]}</script>
 <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -186,6 +187,43 @@
 
     <h3>WhatsApp QR Code for Business</h3>
     <p>India mein WhatsApp sabse zyada use hone wala messaging app hai. Apne WhatsApp number ka QR code banao taki customers ek scan mein aapko message kar sakein. Pre-filled message bhi add kar sakte ho.</p>
+
+    <h3>Which QR Code Type Should I Choose?</h3>
+    <p>Choosing the right QR type depends on what you want the person scanning to see or do. Here is a quick guide for the most common use cases in India:</p>
+    <ul>
+      <li><strong>Shop or restaurant owner accepting payments</strong> → <a href="upi.html">UPI QR Code</a> — works with GPay, PhonePe, Paytm, and every bank app.</li>
+      <li><strong>Small business receiving customer enquiries</strong> → <a href="whatsapp.html">WhatsApp QR Code</a> — one scan opens a chat with a pre-filled message.</li>
+      <li><strong>Café, hotel, or homestay sharing WiFi</strong> → <a href="wifi.html">WiFi QR Code</a> — guests connect without asking for the password.</li>
+      <li><strong>Freelancer, consultant, or salesperson</strong> → <a href="vcard.html">vCard QR Code</a> — saves your full contact card to the scanner's phonebook.</li>
+      <li><strong>Restaurant with digital menu</strong> → <a href="restaurant.html">Restaurant Menu QR</a> — customers scan the tent card and view the menu on their phone.</li>
+      <li><strong>Event organiser</strong> → <a href="event.html">Event QR Code</a> — attendees scan once and the event is saved in their calendar.</li>
+      <li><strong>Multiple codes at once</strong> → <a href="bulk.html">Bulk QR Generator</a> — upload a CSV, get 50 QR codes with matching labels in one go.</li>
+    </ul>
+
+    <h3>How Does a QR Code Actually Work?</h3>
+    <p>A QR code is a two-dimensional grid of black and white squares that stores data as a binary pattern. When a phone camera looks at it, the pattern is decoded back into text — a URL, a UPI payment string, a WiFi password, a phone number, or anything else. The three larger squares in the corners are called <em>finder patterns</em>, and they help the camera correctly orient the code even if you scan it at an angle. The small square near the fourth corner is the <em>alignment pattern</em> and helps with perspective correction. Because the encoding includes error correction (usually 15–30% redundancy), a QR code still scans even if part of it is damaged, dirty, or covered by a small logo — which is why QRMaker lets you add a logo up to 40% without breaking the code.</p>
+
+    <h3>QR Code Print Size Guide for India</h3>
+    <p>QR codes have to be a certain minimum size to scan reliably. Use this table when printing:</p>
+    <ul>
+      <li><strong>Visiting card</strong> — 2 cm × 2 cm minimum. Use error correction "H" to survive smudges.</li>
+      <li><strong>Table tent card / QR on a bill</strong> — 3 cm × 3 cm — comfortable arm's-length scan.</li>
+      <li><strong>Shop counter (payment QR)</strong> — 5 cm × 5 cm — one metre scan distance.</li>
+      <li><strong>Poster / A4 flyer</strong> — 6 cm × 6 cm — most posters get scanned from 1–1.5 m.</li>
+      <li><strong>Shop front or hoarding</strong> — Rule of thumb: QR size = scan distance ÷ 10. A 3 m scan distance needs 30 cm × 30 cm.</li>
+      <li><strong>Outdoor banner</strong> — Always download SVG so the print stays sharp at any size.</li>
+    </ul>
+
+    <h3>Free vs Paid QR Code Generators — What's Actually Different?</h3>
+    <p>Most paid QR code generators charge ₹500–₹2000 per month for what QRMaker gives you free. Here is what you save with QRMaker:</p>
+    <ul>
+      <li><strong>SVG export</strong> — Free here. Competitors charge ₹500+/month.</li>
+      <li><strong>Custom logo inside the QR</strong> — Free here. Competitors gate this behind Pro plans.</li>
+      <li><strong>Bulk generation (50 codes at once)</strong> — Free here. Competitors charge per bulk batch.</li>
+      <li><strong>Custom colours + dot/eye styles</strong> — Free here. Competitors add watermarks unless you pay.</li>
+      <li><strong>UPI payment QR</strong> — Only QRMaker has a built-in generator for the Indian UPI standard.</li>
+    </ul>
+    <p>QRMaker is free because it runs entirely in your browser — there is no server infrastructure to pay for, no user database to maintain, and no ads on the site. Every QR is built with open-standard encoding, so QRs generated here are permanent and never expire.</p>
   </div>
 
   <div class="faq-section">

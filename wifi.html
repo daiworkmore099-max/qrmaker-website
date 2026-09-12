@@ -22,6 +22,7 @@
 <title>WiFi QR Code Generator — Share Password Instantly | QRMaker</title>
 <meta name="description" content="Free WiFi QR code generator. Create QR code for WiFi password — guests scan to connect instantly, no typing needed. Works on Android and iPhone.">
 <link rel="canonical" href="https://www.qrmaker.in/wifi.html">
+<link rel="alternate" hreflang="en-IN" href="https://www.qrmaker.in/wifi.html"><link rel="alternate" hreflang="en" href="https://www.qrmaker.in/wifi.html"><link rel="alternate" hreflang="x-default" href="https://www.qrmaker.in/wifi.html">
 <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -38,6 +39,7 @@
 <meta name="twitter:image" content="https://www.qrmaker.in/og-image.png">
 <!-- JSON-LD -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"WiFi QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.qrmaker.in/"},{"@type":"ListItem","position":2,"name":"WiFi QR Code","item":"https://www.qrmaker.in/wifi.html"}]}</script>
 <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -120,6 +122,36 @@
     <p>Network name (SSID) aur password enter karo, QR code ban jaata hai. Print karo aur table pe ya wall pe lagao. Customers ya guests camera se scan karein — WiFi automatically connect ho jaata hai.</p>
     <h3>Is it safe to share WiFi via QR?</h3>
     <p>Yes. The QR code contains your WiFi name and password, but only people who physically scan it can connect. Keep the QR code in a controlled area (inside your shop/home). Anyone who scans gets your WiFi password, so don't use for secret networks.</p>
+
+    <h3>Best Places to Display a WiFi QR Code</h3>
+    <p>Where you print and stick the WiFi QR decides whether it actually gets used. The QR should be visible without asking, at eye level, and printed large enough to scan from arm's length. Common winning placements in Indian businesses:</p>
+    <ul>
+      <li><strong>Café or restaurant</strong> — small table-top acrylic stand at each table; A6-sized flyer at the counter. Print 5 cm × 5 cm minimum.</li>
+      <li><strong>Hotel or guest house</strong> — inside the welcome folder in every room; also near the reception check-in desk.</li>
+      <li><strong>Homestay or Airbnb</strong> — laminated card on the fridge or bedside table; a magnetic strip works well.</li>
+      <li><strong>Office reception</strong> — for visitor WiFi (separate SSID from staff network); tent card on the coffee table.</li>
+      <li><strong>Salon or clinic waiting area</strong> — near the seating so people can connect while they wait.</li>
+      <li><strong>Co-working space</strong> — printed on every desk plus one poster near the entrance.</li>
+    </ul>
+
+    <h3>Guest WiFi vs Personal WiFi — Which to Share via QR</h3>
+    <p>Never share the WiFi QR of your primary home or office network with strangers. Instead, use your router's <em>guest network</em> feature to create a separate SSID with limited privileges. Print the guest network QR — that way visitors can browse but cannot see your primary devices, printers, NAS, or connected cameras. Most modern routers (Airtel Xstream, JioFiber, TP-Link, ASUS) support guest networks out of the box; enable it once, then generate the QR here.</p>
+
+    <h3>Rotating the WiFi Password Without Reprinting QR</h3>
+    <p>Best practice for any place with public WiFi is to rotate the password every 3–6 months. When you rotate, you have to reprint the QR — there is no way to update the password inside a QR code after it is printed. To make this cheaper, consider:</p>
+    <ul>
+      <li><strong>Print on removable stickers</strong> instead of laminating — swap the sticker when the password changes.</li>
+      <li><strong>Use a QR frame</strong> where the paper slides in — replace only the printed page.</li>
+      <li><strong>Set a friendly, easy-to-remember password</strong> so you rarely need to change it — 4 random dictionary words joined together is stronger than a random 8-char password and easier to type manually if the QR fails.</li>
+    </ul>
+
+    <h3>WiFi QR Code Not Working — Troubleshooting</h3>
+    <ul>
+      <li><strong>iPhone: nothing happens when I scan</strong> — Make sure you are using the Camera app, not a QR scanner app. Also ensure "Scan QR Codes" is enabled in Settings → Camera.</li>
+      <li><strong>Android: notification does not appear</strong> — Some Android phones need Google Lens active. Long-press the home button and select "Google Lens," then point at the QR.</li>
+      <li><strong>Password wrong even though QR is correct</strong> — Check the encryption type. If your router uses WPA3, the QR standard sometimes falls back to WPA2 — you may need to enable "mixed" mode on the router.</li>
+      <li><strong>Hidden network</strong> — If your SSID broadcast is off, the QR must have the Hidden flag enabled. Some phones refuse to auto-connect to hidden networks — user has to add it manually.</li>
+    </ul>
   </div>
 
   <div class="faq-section">
