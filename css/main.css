@@ -1,5 +1,16 @@
 ﻿/* QRMaker — main.css — UI/UX Pro Max Redesign */
 
+/* ── CLS PREVENTION — reserve space for JS-injected panels ── */
+#nav-placeholder { min-height: 60px; }
+#footer-placeholder { min-height: 400px; }
+#design-panel { min-height: 60px; }
+#download-panel { min-height: 172px; }
+#form-area { min-height: 120px; }
+#social-form-area { min-height: 120px; }
+@media (max-width: 768px) {
+  #footer-placeholder { min-height: 700px; }
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
